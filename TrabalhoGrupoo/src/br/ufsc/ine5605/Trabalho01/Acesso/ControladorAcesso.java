@@ -10,6 +10,6 @@ import java.util.ArrayList;
  *
  * @author rak_w
  */
-public class ControladorAcesso {
+public class ControladorAcesso implements IControladorAcesso {
     
 }
