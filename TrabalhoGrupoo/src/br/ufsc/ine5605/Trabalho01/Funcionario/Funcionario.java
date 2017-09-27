@@ -46,6 +46,14 @@ public class Funcionario {
         return telefone;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setNascimento(Date nascimento) {
+        this.nascimento = nascimento;
+    }
+
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
