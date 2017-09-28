@@ -7,7 +7,7 @@ package br.ufsc.ine5605.Trabalho01.Funcionario;
 
 /**
  *
- * @author Avell
+ * @author carcaroff
  */
 import br.ufsc.ine5605.Trabalho01.Cargo.Cargo;
 import java.util.Date;

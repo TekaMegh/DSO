@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 /**
  *
- * @author rak_w
+ * @author carcaroff
  */
 public class ControladorFuncionario implements IControladorFuncionario{
     
@@ -25,16 +25,16 @@ public class ControladorFuncionario implements IControladorFuncionario{
     @Override
     public void incluiFuncionario(String nome, Date nascimento, String telefone, int salario, Cargo cargo) throws Exception{
         if(nome == null){
-            throw new IllegalArgumentException("Nome não pode ter valor nulo!");
+            throw new NullPointerException("Nome não pode ter valor nulo!");
         }
         if(nascimento == null){
-            throw new IllegalArgumentException("Data de nascimento não pode ter valor nulo!");
+            throw new NullPointerException("Data de nascimento não pode ter valor nulo!");
         }
         if(telefone == null){
-            throw new IllegalArgumentException("Telefone não pode ter valor nulo!");
+            throw new NullPointerException("Telefone não pode ter valor nulo!");
         }
         if(cargo == null){
-            throw new IllegalArgumentException("Cargo não pode ter valor nulo!");
+            throw new NullPointerException("Cargo não pode ter valor nulo!");
         }
         Funcionario funcionario1 = new Funcionario(numMatricula, nome, nascimento, telefone, salario, cargo);
         if(!hasFuncionarioByNome(nome)){
@@ -64,16 +64,16 @@ public class ControladorFuncionario implements IControladorFuncionario{
             throw new IllegalArgumentException("Matrícula não pode ter valor inferior a zero!");
         }
         if(nome == null){
-            throw new IllegalArgumentException("Nome não pode ter valor nulo!");
+            throw new NullPointerException("Nome não pode ter valor nulo!");
         }
         if(nascimento == null){
-            throw new IllegalArgumentException("Data de nascimento não pode ter valor nulo!");
+            throw new NullPointerException("Data de nascimento não pode ter valor nulo!");
         }
         if(telefone == null){
-            throw new IllegalArgumentException("Telefone não pode ter valor nulo!");
+            throw new NullPointerException("Telefone não pode ter valor nulo!");
         }
         if(cargo == null){
-            throw new IllegalArgumentException("Cargo não pode ter valor nulo!");
+            throw new NullPointerException("Cargo não pode ter valor nulo!");
         }
         try{
             findFuncionarioByMatricula(matricula);
