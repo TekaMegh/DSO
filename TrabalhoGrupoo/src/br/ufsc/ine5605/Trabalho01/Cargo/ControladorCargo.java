@@ -12,4 +12,17 @@ import java.util.ArrayList;
  */
 public class ControladorCargo implements IControladorCargo {
     
+    private ArrayList<Cargo> cargos = new ArrayList<>();
+    
+    public void incluiCargo(Cargo cargo){
+        this.cargos.add(cargo);
+    }
+    
+    public void removeCargo(Cargo cargo){
+        this.cargos.remove(cargo);
+    }
+    
+    public ArrayList<Cargo> getCargos(){
+        return this.cargos;
+    }
 }

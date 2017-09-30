@@ -11,4 +11,19 @@ package br.ufsc.ine5605.Trabalho01.Cargo;
  */
 public class Cargo {
     
+     protected int codigoCargo;
+     protected String nomeCargo;
+     
+     public Cargo(int codigo, String nome){
+         this.codigoCargo = codigo;
+         this.nomeCargo = nome;
+     }
+     
+     public int getCodigoCargo(){
+         return this.codigoCargo;
+     }
+     
+     public String getNomeCargo(){
+         return this.nomeCargo;
+     }
 }
