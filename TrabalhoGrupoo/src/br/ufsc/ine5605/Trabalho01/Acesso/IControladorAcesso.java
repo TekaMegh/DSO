@@ -5,10 +5,29 @@
  */
 package br.ufsc.ine5605.Trabalho01.Acesso;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author rak_w
  */
 public interface IControladorAcesso {
-    
+
+    /**
+     * @param matricula
+     * @param horaDeAcesso
+     * @return String afirmando se foi possível a entrada ou não.
+     *
+     *
+     */
+    public String validaAcesso(int matricula, Date horaDeAcesso);
+
+    /**
+     *
+     * @param tipo
+     * @return ArrayList de Acessos baseada no tipo enviado como parâmetro.
+     */
+    public ArrayList<Acesso> getAcessosByTipo(TipoAcesso tipo);
+
 }

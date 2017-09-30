@@ -11,4 +11,9 @@ package br.ufsc.ine5605.Trabalho01.Acesso;
  */
 public class Acesso {
     
+    private TipoAcesso tipo;
+    
+    
+    
+    
 }
