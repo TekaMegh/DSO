@@ -5,15 +5,28 @@
  */
 package br.ufsc.ine5605.Trabalho01.Acesso;
 
+import br.ufsc.ine5605.Trabalho01.Funcionario.Funcionario;
+
 /**
  *
  * @author rak_w
  */
 public class Acesso {
-    
+
     private TipoAcesso tipo;
-    
-    
-    
-    
+
+    public Acesso(TipoAcesso tipo) {
+        this.tipo = tipo;
+
+    }
+
+    public TipoAcesso getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoAcesso tipo) {
+        this.tipo = tipo;
+    }
+
+
 }

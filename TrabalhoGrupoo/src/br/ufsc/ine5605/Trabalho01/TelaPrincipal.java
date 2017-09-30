@@ -10,5 +10,9 @@ package br.ufsc.ine5605.Trabalho01;
  * @author rak_w
  */
 public class TelaPrincipal {
+
+    void exibeMenuPrincipal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

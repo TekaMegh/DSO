@@ -12,6 +12,31 @@ import java.util.ArrayList;
  */
 public class ControladorPrincipal {
     
+    private static ControladorPrincipal ctrl = new ControladorPrincipal();
+
+    private TelaPrincipal tela;
+    
+    private ControladorPrincipal() {
+        tela = new TelaPrincipal();
+    }
+
+    public void inicia() {
+        tela.exibeMenuPrincipal();
+    }
+
+    /**
+     * 
+     * @return única instância do controlador principal.
+     */
+    public static ControladorPrincipal getInstance() {
+
+        if (ctrl == null) {
+            ctrl = new ControladorPrincipal();
+        }
+
+        return ctrl;
+    }
+    
     
     
 }

@@ -30,4 +30,6 @@ public interface IControladorAcesso {
      */
     public ArrayList<Acesso> getAcessosByTipo(TipoAcesso tipo);
 
+    public ArrayList<Acesso> getAcessosByMatricula(int matricula);
+
 }

@@ -10,26 +10,27 @@ package br.ufsc.ine5605.Trabalho01.Acesso;
  * @author rak_w
  */
 public enum TipoAcesso {
-    
+
     SEMMATRICULA("Matrícula já existe."),
     NAOPOSSUIACESSO("Esse funcionario nao possui acesso."),
     HORARIONAOPERMITIDO("Funcionario fora do horario autorizado para acesso"),
-    ACESSOBLOQUEADO("Acesso bloqueado");
+    ACESSOBLOQUEADO("Acesso bloqueado"),
+    AUTORIZADO("Acesso autorizado");
     
     private String descricao;
-    
+
     /**
      * criacao do tipo de acesso
-     * @param descricaoTipo 
-     * 
+     *
+     * @param descricaoTipo
+     *
      */
-    TipoAcesso(String descricaoTipo){
+    TipoAcesso(String descricaoTipo) {
         descricao = descricaoTipo;
     }
-    
-    
-    public String descricao(){
+
+    public String descricao() {
         return descricao;
     }
-    
+
 }
