@@ -9,20 +9,22 @@ package br.ufsc.ine5605.Trabalho01.Funcionario;
  *
  * @author carcaroff
  */
-import br.ufsc.ine5605.Trabalho01.Acesso.Acesso;
+
+//import br.ufsc.ine5605.Trabalho01.Acesso.Acesso;
 import java.util.Date;
 import br.ufsc.ine5605.Trabalho01.Cargo.Cargo;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Funcionario {
     
-    private int matricula;
+    private final int matricula;
     private String nome;
     private Date nascimento;
     private String telefone;
     private int salario;
     private Cargo cargo;
-    private ArrayList<Acesso> acessosNegados;
+
+    //private ArrayList<Acesso> acessosNegados;
     
     public Funcionario(int matricula, String nome, Date nascimento, String telefone, int salario, Cargo cargo){
         this.matricula = matricula;
@@ -80,11 +82,7 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    public ArrayList<Acesso> getAcessosNegados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    
-    
+    //public ArrayList<Acesso> getAcessosNegados() {
+    //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    //}
 }

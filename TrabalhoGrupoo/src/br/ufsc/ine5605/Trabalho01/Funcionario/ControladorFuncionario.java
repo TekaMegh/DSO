@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class ControladorFuncionario implements IControladorFuncionario{
     
+    private static final ControladorFuncionario controladorFuncionario = new ControladorFuncionario();
     private ArrayList<Funcionario> listaFuncionario;
     private int numMatricula;
     
@@ -22,6 +23,9 @@ public class ControladorFuncionario implements IControladorFuncionario{
         this.numMatricula += 1;
     }
     
+    public void inicia(){
+        TelaFuncionario.telaFuncionario.mostrarTela();
+    }
     @Override
     public void incluiFuncionario(String nome, Date nascimento, String telefone, int salario, Cargo cargo) throws Exception{
         if(nome == null){
@@ -40,9 +44,11 @@ public class ControladorFuncionario implements IControladorFuncionario{
         if(!hasFuncionarioByNome(nome)){
             listaFuncionario.add(funcionario1);
             numMatricula += 1;
+            System.out.println("Funcionário cadastrado com sucesso!");
         } else { 
             throw new Exception ("Não foi possível cadastrar o usuário. Já existe usuário cadastrado com o mesmo nome");
         }
+        controladorFuncionario.inicia();
     }
     
     @Override
@@ -51,11 +57,12 @@ public class ControladorFuncionario implements IControladorFuncionario{
             throw new IllegalArgumentException("Matrícula não pode ter valor inferior a zero!");
         }
         try{
-            findFuncionarioByMatricula(matricula);
+            listaFuncionario.remove(findFuncionarioByMatricula(matricula));
+            System.out.println("Funcionário removido com sucesso!");
         } catch(Exception e){
             throw e;
         }
-        listaFuncionario.remove(findFuncionarioByMatricula(matricula));
+        controladorFuncionario.inicia();
     }
     
     @Override
@@ -75,17 +82,19 @@ public class ControladorFuncionario implements IControladorFuncionario{
         if(cargo == null){
             throw new NullPointerException("Cargo não pode ter valor nulo!");
         }
+        
         try{
-            findFuncionarioByMatricula(matricula);
+            Funcionario funcionario = findFuncionarioByMatricula(matricula);
+            funcionario.setNascimento(nascimento);
+            funcionario.setCargo(cargo);
+            funcionario.setSalario(salario);
+            funcionario.setTelefone(telefone);
+            funcionario.setNome(nome);
+            System.out.println("Funcionário modificado com sucesso!");
         } catch(Exception e){
             throw e;
         }
-        Funcionario funcionario = findFuncionarioByMatricula(matricula);
-        funcionario.setNascimento(nascimento);
-        funcionario.setCargo(cargo);
-        funcionario.setSalario(salario);
-        funcionario.setTelefone(telefone);
-        funcionario.setNome(nome);
+        controladorFuncionario.inicia();
     }
     
     public Funcionario findFuncionarioByMatricula(int matricula) throws Exception{
@@ -104,5 +113,17 @@ public class ControladorFuncionario implements IControladorFuncionario{
             }
         }
         return false;
+    }
+
+    public ArrayList<Funcionario> getListaFuncionario() {
+        return listaFuncionario;
+    }
+
+    public void setListaFuncionario(ArrayList<Funcionario> listaFuncionario) {
+        this.listaFuncionario = listaFuncionario;
+    }
+    
+    public static ControladorFuncionario getInstance(){
+        return controladorFuncionario;
     }
 }
