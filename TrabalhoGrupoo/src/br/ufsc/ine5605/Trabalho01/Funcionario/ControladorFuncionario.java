@@ -17,15 +17,29 @@ public class ControladorFuncionario implements IControladorFuncionario{
     private static final ControladorFuncionario controladorFuncionario = new ControladorFuncionario();
     private ArrayList<Funcionario> listaFuncionario;
     private int numMatricula;
+    private TelaFuncionario telaFuncionario;
     
     public ControladorFuncionario(){
         listaFuncionario = new ArrayList<>();
         this.numMatricula += 1;
+        telaFuncionario = new TelaFuncionario();
+    }
+    /**
+     * Abre a tela de Funcionários.
+     */
+    public void inicia(){
+        telaFuncionario.mostrarTela();
     }
     
-    public void inicia(){
-        TelaFuncionario.telaFuncionario.mostrarTela();
-    }
+    /**
+     * O método inclui o novo funcionário na lista(arraylist) de funcionarios.
+     * @param nome
+     * @param nascimento
+     * @param telefone
+     * @param salario
+     * @param cargo
+     * @throws Exception 
+     */
     @Override
     public void incluiFuncionario(String nome, Date nascimento, String telefone, int salario, Cargo cargo) throws Exception{
         if(nome == null){
@@ -51,6 +65,12 @@ public class ControladorFuncionario implements IControladorFuncionario{
         controladorFuncionario.inicia();
     }
     
+    
+    /**
+     * Exclui um funcionário através da matrícula.
+     * @param matricula
+     * @throws Exception 
+     */
     @Override
     public void removeFuncionario(int matricula) throws Exception{
         if(matricula <= 0){
@@ -65,6 +85,16 @@ public class ControladorFuncionario implements IControladorFuncionario{
         controladorFuncionario.inicia();
     }
     
+    /**
+     * Modifica os dados do funcionário.
+     * @param matricula
+     * @param nome
+     * @param nascimento
+     * @param telefone
+     * @param salario
+     * @param cargo
+     * @throws Exception 
+     */
     @Override
     public void modificaFuncionario(int matricula, String nome, Date nascimento, String telefone, int salario, Cargo cargo) throws Exception{
         if(matricula <= 0){

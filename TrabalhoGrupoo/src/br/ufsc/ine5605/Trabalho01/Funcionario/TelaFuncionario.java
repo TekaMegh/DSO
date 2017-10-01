@@ -16,7 +16,6 @@ import br.ufsc.ine5605.Trabalho01.Cargo.Cargo;
 import java.util.ArrayList;
 
 public class TelaFuncionario {
-    public static final TelaFuncionario telaFuncionario = new TelaFuncionario();
     private final Scanner sc;
     
     public TelaFuncionario(){

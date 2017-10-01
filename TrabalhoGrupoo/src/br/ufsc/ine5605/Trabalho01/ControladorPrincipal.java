@@ -5,36 +5,64 @@
  */
 package br.ufsc.ine5605.Trabalho01;
 
-import java.util.ArrayList;
+import br.ufsc.ine5605.Trabalho01.Acesso.ControladorAcesso;
+import br.ufsc.ine5605.Trabalho01.Cargo.ControladorCargo;
+import br.ufsc.ine5605.Trabalho01.Funcionario.ControladorFuncionario;
+import br.ufsc.ine5605.Trabalho01.IntervaloDeAcesso.ControladorIntervaloDeAcesso;
+
 /**
  *
  * @author rak_w
  */
 public class ControladorPrincipal {
     
-    private static ControladorPrincipal ctrl = new ControladorPrincipal();
+    private final static ControladorPrincipal controladorPrincipal = new ControladorPrincipal();
 
     private TelaPrincipal tela;
     
-    private ControladorPrincipal() {
+    public ControladorPrincipal() {
         tela = new TelaPrincipal();
     }
-
+    
+    /**
+     * Mostra a tela principal, e encaminha a opção escolhida para tratamento.
+     */
     public void inicia() {
-        tela.exibeMenuPrincipal();
+        int opcao = tela.exibeMenuPrincipal();
+        try{
+            opcaoSwitch(opcao);
+        } catch (Exception e){
+            tela.print(e.getMessage());
+        }
+    }
+    
+    public void opcaoSwitch(int opcao){
+        switch(opcao){
+            case 1:
+                ControladorAcesso.getInstance().inicia();
+                break;
+            case 2:
+                ControladorCargo.getInstance().inicia();
+                break;
+            case 3:
+                ControladorFuncionario.getInstance().inicia();
+            //case 4:
+              //  ControladorIntervaloDeAcesso.getIntance().inicia();
+              //  break;
+            case 0:
+                return;
+            default:
+                tela.print("Opção inválida.");
+                controladorPrincipal.inicia();
+        }
     }
 
     /**
-     * 
-     * @return única instância do controlador principal.
+     * Retorna o controlador Principal.
+     * @return ControladorPrincipal
      */
     public static ControladorPrincipal getInstance() {
-
-        if (ctrl == null) {
-            ctrl = new ControladorPrincipal();
-        }
-
-        return ctrl;
+        return controladorPrincipal;
     }
     
     
