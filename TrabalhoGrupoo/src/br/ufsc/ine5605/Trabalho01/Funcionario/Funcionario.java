@@ -22,7 +22,7 @@ public class Funcionario {
     private String telefone;
     private int salario;
     private Cargo cargo;
-    private ArrayList<Acesso> acessosNegados;
+    
     
     public Funcionario(int matricula, String nome, Date nascimento, String telefone, int salario, Cargo cargo){
         this.matricula = matricula;
@@ -80,9 +80,7 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    public ArrayList<Acesso> getAcessosNegados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     
     

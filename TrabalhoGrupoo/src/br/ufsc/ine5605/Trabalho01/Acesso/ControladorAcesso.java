@@ -70,13 +70,17 @@ public class ControladorAcesso implements IControladorAcesso {
         ArrayList<Acesso> listaAcessosByMatricula = new ArrayList<>();
 
         for (Funcionario funcionario : funcionariosComAcessoNegado) {
+            
             if (funcionario.getMatricula() == matricula) {
 
-                return funcionario.getAcessosNegados();
-
+                for (Acesso acesso : acessos) {
+                    if(acesso.getMatricula() == matricula){
+                        listaAcessosByMatricula.add(acesso);
+                    }
+                }
             }
         }
-        return null;
+        return listaAcessosByMatricula;
     }
 
 }

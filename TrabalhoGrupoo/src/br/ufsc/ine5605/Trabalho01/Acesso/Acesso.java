@@ -14,9 +14,11 @@ import br.ufsc.ine5605.Trabalho01.Funcionario.Funcionario;
 public class Acesso {
 
     private TipoAcesso tipo;
+    private int matricula;
 
-    public Acesso(TipoAcesso tipo) {
+    public Acesso(TipoAcesso tipo, int matricula) {
         this.tipo = tipo;
+        this.matricula = matricula;
 
     }
 
@@ -28,5 +30,8 @@ public class Acesso {
         this.tipo = tipo;
     }
 
+    public int getMatricula() {
+        return matricula;
+    }
 
 }
