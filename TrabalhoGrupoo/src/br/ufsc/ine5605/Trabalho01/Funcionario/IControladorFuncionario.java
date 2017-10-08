@@ -14,6 +14,11 @@ import java.util.Date;
 
 public interface IControladorFuncionario {
     /**
+     * Abre a tela de Funcionários e encaminha opção selecionada para o metodo de switch.
+     */
+    public void inicia();
+    
+    /**
      * O método inclui o novo funcionário na lista(arraylist) de funcionarios.
      * @param nome
      * @param nascimento

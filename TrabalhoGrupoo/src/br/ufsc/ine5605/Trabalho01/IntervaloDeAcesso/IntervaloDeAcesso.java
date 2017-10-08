@@ -14,11 +14,16 @@ import java.text.SimpleDateFormat;
 public class IntervaloDeAcesso {
     private Date horarioInicial;
     private Date horarioFinal;
+    private SimpleDateFormat formatadorHora;
     
     public IntervaloDeAcesso(String horaInicial, String horaFinal){
-        SimpleDateFormat formatadorHora = new SimpleDateFormat("HH:mm");
-        this.horarioInicial = formatadorHora.parse(horaInicial);
-        this.horarioFinal = formatadorHora.parse(horaFinal);
+        formatadorHora = new SimpleDateFormat("HH:mm");
+        try{    
+            this.horarioInicial = formatadorHora.parse(horaInicial);
+            this.horarioFinal = formatadorHora.parse(horaFinal);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     
     public Date getHorarioInicial(){
@@ -26,8 +31,12 @@ public class IntervaloDeAcesso {
     }
     
     public void setHorarioInicial(String horaInicial){
-        SimpleDateFormat formatadorHora = new SimpleDateFormat("HH:mm");
-        this.horarioInicial = formatadorHora.parse(horaInicial);
+        formatadorHora = new SimpleDateFormat("HH:mm");
+        try{
+            this.horarioInicial = formatadorHora.parse(horaInicial);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
     
     public Date getHorarioFinal(){
@@ -35,7 +44,11 @@ public class IntervaloDeAcesso {
     }
     
     public void setHorarioFinal(String horaFinal){
-        SimpleDateFormat formatadorHora = new SimpleDateFormat("HH:mm");
-        this.horarioFinal = formatadorHora.parse(horaFinal);
+        formatadorHora = new SimpleDateFormat("HH:mm");
+        try{
+            this.horarioInicial = formatadorHora.parse(horaFinal);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

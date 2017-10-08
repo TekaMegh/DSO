@@ -50,7 +50,7 @@ public class ControladorPrincipal {
               //  ControladorIntervaloDeAcesso.getIntance().inicia();
               //  break;
             case 0:
-                return;
+                System.exit(0);
             default:
                 tela.print("Opção inválida.");
                 controladorPrincipal.inicia();

@@ -12,7 +12,18 @@ import java.util.ArrayList;
  */
 public class ControladorCargo implements IControladorCargo {
     
+    private static final ControladorCargo controladorCargo = new ControladorCargo();
+    private TelaCargo telaCargo;
     private ArrayList<Cargo> cargos = new ArrayList<>();
+    
+    public ControladorCargo(){
+        this.telaCargo = new TelaCargo();
+        this.cargos = new ArrayList<>();
+    }
+    
+    public void inicia(){
+        telaCargo.mostrarTela();
+    }
     
     public void incluiCargo(Cargo cargo){
         this.cargos.add(cargo);
@@ -24,5 +35,9 @@ public class ControladorCargo implements IControladorCargo {
     
     public ArrayList<Cargo> getCargos(){
         return this.cargos;
+    }
+    
+    public static ControladorCargo getInstance(){
+        return controladorCargo;
     }
 }

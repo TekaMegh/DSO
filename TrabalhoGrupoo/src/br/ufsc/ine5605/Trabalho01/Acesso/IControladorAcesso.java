@@ -13,7 +13,10 @@ import java.util.Date;
  * @author rak_w
  */
 public interface IControladorAcesso {
-
+    /**
+     * Abre a tela de acesso.
+     */
+    public void inicia();
     /**
      * @param matricula
      * @param horaDeAcesso

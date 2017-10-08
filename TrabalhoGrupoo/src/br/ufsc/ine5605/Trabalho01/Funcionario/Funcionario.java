@@ -23,12 +23,6 @@ public class Funcionario {
     private String telefone;
     private int salario;
     private Cargo cargo;
-<<<<<<< HEAD
-    
-=======
-
-    //private ArrayList<Acesso> acessosNegados;
->>>>>>> fbd83b309ee74737ceef5f33d8bfca35d98bd5e5
     
     public Funcionario(int matricula, String nome, Date nascimento, String telefone, int salario, Cargo cargo){
         this.matricula = matricula;
@@ -39,8 +33,6 @@ public class Funcionario {
         this.cargo = cargo;
         
     }
-
-    
 
     public int getMatricula() {
         return matricula;
@@ -85,16 +77,5 @@ public class Funcionario {
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
-
-<<<<<<< HEAD
     
-
-    
-    
-    
-=======
-    //public ArrayList<Acesso> getAcessosNegados() {
-    //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    //}
->>>>>>> fbd83b309ee74737ceef5f33d8bfca35d98bd5e5
 }

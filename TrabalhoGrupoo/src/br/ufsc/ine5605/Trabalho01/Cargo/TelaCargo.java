@@ -11,4 +11,7 @@ package br.ufsc.ine5605.Trabalho01.Cargo;
  */
 public class TelaCargo {
     
+    public void mostrarTela(){
+        System.out.println("------------Tela de Cargos--------------");
+    }
 }

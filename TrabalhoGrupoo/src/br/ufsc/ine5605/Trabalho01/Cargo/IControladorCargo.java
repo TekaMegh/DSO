@@ -5,10 +5,20 @@
  */
 package br.ufsc.ine5605.Trabalho01.Cargo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Avell
  */
 interface IControladorCargo {
+    
+    public void inicia();
+    
+    public void incluiCargo(Cargo cargo);
+    
+    public void removeCargo(Cargo cargo);
+    
+    public ArrayList<Cargo> getCargos();
     
 }
