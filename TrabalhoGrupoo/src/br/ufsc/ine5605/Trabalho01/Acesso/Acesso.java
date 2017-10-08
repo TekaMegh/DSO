@@ -6,6 +6,7 @@
 package br.ufsc.ine5605.Trabalho01.Acesso;
 
 import br.ufsc.ine5605.Trabalho01.Funcionario.Funcionario;
+import java.util.Date;
 
 /**
  *
@@ -15,10 +16,12 @@ public class Acesso {
 
     private TipoAcesso tipo;
     private int matricula;
+    private Date horadeacesso;
 
-    public Acesso(TipoAcesso tipo, int matricula) {
+    public Acesso(TipoAcesso tipo, int matricula, Date horadeacesso) {
         this.tipo = tipo;
         this.matricula = matricula;
+        this.horadeacesso = horadeacesso;
 
     }
 
@@ -34,4 +37,7 @@ public class Acesso {
         return matricula;
     }
 
+    public Date getHoraDeAcesso(){
+        return horadeacesso;
+    }
 }

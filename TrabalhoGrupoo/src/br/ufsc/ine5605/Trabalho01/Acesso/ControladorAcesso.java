@@ -39,6 +39,7 @@ public class ControladorAcesso implements IControladorAcesso {
         return ctrl;
     }
 
+    @Override
     public void inicia() {
         tela.exibeMenuPrincipal();
     }
@@ -47,7 +48,15 @@ public class ControladorAcesso implements IControladorAcesso {
     public String validaAcesso(int matricula, Date horaDeAcesso) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    
+    public boolean validaHorario(Date now, Date start, Date end) {
+        if (now == null || start == null || end == null) {
+            return false;
+        }
+        return now.after(start) && now.before(end);
+    }
+    
     /**
      *
      * @param tipo
