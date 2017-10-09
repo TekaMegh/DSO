@@ -12,13 +12,13 @@ import java.util.ArrayList;
  * @author Avell
  */
 interface IControladorCargo {
-    
+
     public void inicia();
-    
-    public void incluiCargo(Cargo cargo);
-    
-    public void removeCargo(Cargo cargo);
-    
+
+    public void incluiCargo(String nome, boolean mayEnter);
+
+    public void removeCargoByCodigo(int codigo);
+
     public ArrayList<Cargo> getCargos();
-    
+
 }

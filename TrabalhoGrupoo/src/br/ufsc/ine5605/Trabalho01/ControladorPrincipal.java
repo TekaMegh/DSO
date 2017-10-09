@@ -5,10 +5,9 @@
  */
 package br.ufsc.ine5605.Trabalho01;
 
-import br.ufsc.ine5605.Trabalho01.Acesso.ControladorAcesso;
+import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
 import br.ufsc.ine5605.Trabalho01.Cargo.ControladorCargo;
 import br.ufsc.ine5605.Trabalho01.Funcionario.ControladorFuncionario;
-import br.ufsc.ine5605.Trabalho01.IntervaloDeAcesso.ControladorIntervaloDeAcesso;
 
 /**
  *
@@ -46,9 +45,6 @@ public class ControladorPrincipal {
                 break;
             case 3:
                 ControladorFuncionario.getInstance().inicia();
-            //case 4:
-              //  ControladorIntervaloDeAcesso.getIntance().inicia();
-              //  break;
             case 0:
                 System.exit(0);
             default:

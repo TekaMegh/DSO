@@ -152,8 +152,8 @@ public class ControladorFuncionario implements IControladorFuncionario{
                         telaFuncionario.print("Salário: " + funcionario.getSalario());
                         telaFuncionario.print("Telefone: " + funcionario.getTelefone());
                         telaFuncionario.printData(funcionario.getNascimento());
-                        telaFuncionario.print("Nome do cargo: " + funcionario.getCargo().getNomeCargo());
-                        telaFuncionario.print("Código do cargo: " + funcionario.getCargo().getCodigoCargo());
+                        telaFuncionario.print("Nome do cargo: " + funcionario.getCargo().getNome());
+                        telaFuncionario.print("Código do cargo: " + funcionario.getCargo().getCodigo());
                     }
                 }
                 ControladorFuncionario.getInstance().inicia();

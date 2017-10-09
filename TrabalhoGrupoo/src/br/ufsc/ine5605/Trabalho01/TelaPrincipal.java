@@ -24,7 +24,6 @@ public class TelaPrincipal {
         System.out.println("1 - Menu de Acessos.");
         System.out.println("2 - Menu de Cargos.");
         System.out.println("3 - Menu de Funcionários.");
-        //System.out.println("4 - Menu de Intervalos de Horários de Acesso.");
         System.out.println("0 - Fechar o Sistema.");
         return sc.nextInt();
     }
