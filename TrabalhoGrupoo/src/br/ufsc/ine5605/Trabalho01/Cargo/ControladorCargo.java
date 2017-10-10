@@ -1,28 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufsc.ine5605.Trabalho01.Cargo;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author rak_w
- */
 public class ControladorCargo implements IControladorCargo {
 
     private static final ControladorCargo controladorCargo = new ControladorCargo();
+
     private TelaCargo tela;
-    private ArrayList<Cargo> cargos = new ArrayList<>();
+
+    private ArrayList<Cargo> cargos = new ArrayList();
+
     private int numCodigo;
 
     public ControladorCargo() {
         this.tela = new TelaCargo(this);
-        this.cargos = new ArrayList<>();
+        this.cargos = new ArrayList();
         this.numCodigo = 1;
     }
 
@@ -37,11 +31,9 @@ public class ControladorCargo implements IControladorCargo {
 
     @Override
     public void incluiCargo(String nome, boolean mayEnter) {
-
         Cargo cargo = new Cargo(this.numCodigo, nome, mayEnter);
         this.numCodigo += 1;
         cargos.add(cargo);
-
     }
 
     @Override
@@ -55,19 +47,16 @@ public class ControladorCargo implements IControladorCargo {
 
     @Override
     public void removeCargoByCodigo(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public Cargo getCargoByNome(String nomeCargo) throws Exception {
-
         for (Cargo cargo : cargos) {
             if (cargo.getNome().equals(nomeCargo)) {
                 return cargo;
             }
-
         }
         throw new Exception("Cargo não existe");
-
     }
 
     public Cargo getCargoByCodigo(int codigo) throws Exception {
@@ -75,7 +64,6 @@ public class ControladorCargo implements IControladorCargo {
             if (cargo.getCodigo() == codigo) {
                 return cargo;
             }
-
         }
         throw new Exception("Cargo não existe");
     }
@@ -85,10 +73,8 @@ public class ControladorCargo implements IControladorCargo {
         for (Cargo cargo : cargos) {
             if (cargo.getCodigo() == codigo) {
                 cargo.addIntervalos(intervalo);
-
             }
         }
-
     }
 
     public void setNomeInCargoByCodigo(int codigo, String nome) {
@@ -97,12 +83,10 @@ public class ControladorCargo implements IControladorCargo {
                 cargo.setNome(nome);
             }
         }
-
     }
 
     public boolean hasNome(String nome) {
         for (Cargo cargo : cargos) {
-
             if (cargo.getNome().equals(nome)) {
                 return true;
             }
@@ -112,7 +96,6 @@ public class ControladorCargo implements IControladorCargo {
 
     public boolean hasCodigo(int novoCodigo) {
         for (Cargo cargo : cargos) {
-
             if (cargo.getCodigo() == novoCodigo) {
                 return true;
             }

@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufsc.ine5605.Trabalho01.Cargo;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-/**
- *
- * @author rak_w
- */
 public class IntervaloDeAcesso {
 
     private Date horarioInicial;
+
     private Date horarioFinal;
+
     private SimpleDateFormat formatadorHora;
 
     public IntervaloDeAcesso(String horaInicial, String horaFinal) {

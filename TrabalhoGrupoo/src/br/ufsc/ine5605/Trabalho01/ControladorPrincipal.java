@@ -1,42 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufsc.ine5605.Trabalho01;
 
 import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
 import br.ufsc.ine5605.Trabalho01.Cargo.ControladorCargo;
+import br.ufsc.ine5605.Trabalho01.Cargo.IntervaloDeAcesso;
 import br.ufsc.ine5605.Trabalho01.Funcionario.ControladorFuncionario;
+import br.ufsc.ine5605.Trabalho01.Funcionario.Funcionario;
+import java.util.ArrayList;
 
-/**
- *
- * @author rak_w
- */
 public class ControladorPrincipal {
-    
-    private final static ControladorPrincipal controladorPrincipal = new ControladorPrincipal();
+
+    private static final ControladorPrincipal controladorPrincipal = new ControladorPrincipal();
 
     private TelaPrincipal tela;
-    
+
     public ControladorPrincipal() {
         tela = new TelaPrincipal();
     }
-    
-    /**
-     * Mostra a tela principal, e encaminha a opção escolhida para tratamento.
-     */
+
     public void inicia() {
         int opcao = tela.exibeMenuPrincipal();
-        try{
+        try {
             opcaoSwitch(opcao);
-        } catch (Exception e){
+        } catch (Exception e) {
             tela.print(e.getMessage());
         }
     }
-    
-    public void opcaoSwitch(int opcao){
-        switch(opcao){
+
+    public void opcaoSwitch(int opcao) {
+        switch(opcao) {
             case 1:
                 ControladorAcesso.getInstance().inicia();
                 break;
@@ -53,14 +44,21 @@ public class ControladorPrincipal {
         }
     }
 
-    /**
-     * Retorna o controlador Principal.
-     * @return ControladorPrincipal
-     */
     public static ControladorPrincipal getInstance() {
         return controladorPrincipal;
     }
-    
-    
+
+    public ArrayList<Funcionario> getListaFuncionarios() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Funcionario getFuncionarioByMatricula(int matricula) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ArrayList<IntervaloDeAcesso> getListaIntervaloDeAcessos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }
