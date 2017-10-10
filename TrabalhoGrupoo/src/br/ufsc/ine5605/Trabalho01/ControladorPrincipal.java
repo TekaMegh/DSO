@@ -1,10 +1,10 @@
 package br.ufsc.ine5605.Trabalho01;
 
 import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
-import br.ufsc.ine5605.Trabalho01.Cargo.ControladorCargo;
-import br.ufsc.ine5605.Trabalho01.Cargo.IntervaloDeAcesso;
-import br.ufsc.ine5605.Trabalho01.Funcionario.ControladorFuncionario;
-import br.ufsc.ine5605.Trabalho01.Funcionario.Funcionario;
+import br.ufsc.ine5605.Trabalho01.Cargos.ControladorCargo;
+import br.ufsc.ine5605.Trabalho01.Cargos.IntervaloDeAcesso;
+import br.ufsc.ine5605.Trabalho01.Funcionarios.ControladorFuncionario;
+import br.ufsc.ine5605.Trabalho01.Funcionarios.Funcionario;
 import java.util.ArrayList;
 
 public class ControladorPrincipal {

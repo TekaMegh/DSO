@@ -1,7 +1,7 @@
-package br.ufsc.ine5605.Trabalho01.Funcionario;
+package br.ufsc.ine5605.Trabalho01.Funcionarios;
 
 import java.util.Date;
-import br.ufsc.ine5605.Trabalho01.Cargo.Cargo;
+import br.ufsc.ine5605.Trabalho01.Cargos.Cargo;
 
 public class Funcionario {
 

@@ -1,6 +1,6 @@
 package br.ufsc.ine5605.Trabalho01.Entrada;
 
-import br.ufsc.ine5605.Trabalho01.Funcionario.Funcionario;
+import br.ufsc.ine5605.Trabalho01.Funcionarios.Funcionario;
 import java.util.Date;
 
 public class Acesso {

@@ -1,8 +1,8 @@
 package br.ufsc.ine5605.Trabalho01.Entrada;
 
-import br.ufsc.ine5605.Trabalho01.Cargo.IntervaloDeAcesso;
+import br.ufsc.ine5605.Trabalho01.Cargos.IntervaloDeAcesso;
 import br.ufsc.ine5605.Trabalho01.ControladorPrincipal;
-import br.ufsc.ine5605.Trabalho01.Funcionario.Funcionario;
+import br.ufsc.ine5605.Trabalho01.Funcionarios.Funcionario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package br.ufsc.ine5605.Trabalho01.Cargo;
+package br.ufsc.ine5605.Trabalho01.Cargos;
 
 import java.util.ArrayList;
 
