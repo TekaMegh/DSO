@@ -209,4 +209,142 @@ public class TelaCargo {
         } while (opcaoInvalida);
     }
 
+    public Cargo escolhaDeCargo() throws Exception {
+        boolean opcaoInvalida;
+        System.out.println("----------Listagem de Cargos----------");
+        ArrayList<Cargo> listaCargos = owner.getCargos();
+        if (listaCargos.isEmpty()) {
+            System.out.println("Não há cargos cadastrados. Para prosseguir com o cadastro de funcionários, por favor, cadastre um cargo primeiro.");
+            do {
+                opcaoInvalida = false;
+                System.out.println("1- Cadastrar um novo cargo");
+                System.out.println("2- Retornar para o menu de funcionários");
+                int opcao = leia.nextInt();
+                switch (opcao) {
+                    case 1:
+                        this.cadastroCargo();
+                        break;
+                    case 2:
+                        return null;
+                    default:
+                        System.out.println("Opcao invalida");
+                        opcaoInvalida = true;
+                }
+
+            } while (opcaoInvalida);
+            System.out.println("----------Seleção de Cargo do Funcionário----------");
+            return null;
+            /*telaFuncionario.print("Selecione o cargo associado ao novo funcionário:");
+                int i = 0;
+                for (Cargo cargo : listaCargos) {
+                    telaFuncionario.print("" + i + " - " + cargo.getNome());
+                }
+                int opcaoCargo = 0;
+                boolean intValido = false;
+                do {
+                    while (!telaFuncionario.getScanner().hasNextInt()) {
+                        telaFuncionario.print("Numero inválido. Por favor, selecione um cargo abaixo: ");
+                        for (Cargo cargo : listaCargos) {
+                            telaFuncionario.print("" + i + " - " + cargo.getNome());
+                        }
+                        telaFuncionario.getScanner().next();
+                    }
+                    opcaoCargo = telaFuncionario.getScanner().nextInt();
+                    if (opcaoCargo < 0 || opcaoCargo > listaCargos.size()) {
+                        telaFuncionario.print("Numero inválido. Por favor, selecione um cargo abaixo: ");
+                        for (Cargo cargo : listaCargos) {
+                            telaFuncionario.print("" + i + " - " + cargo.getNome());
+                        }
+                    } else {
+                        intValido = true;
+                    }
+                } while (!intValido);
+                ArrayList<Cargo> listaCargo = ControladorCargo.getInstance().getCargos();
+                Cargo cargo = listaCargo.get(opcaoCargo);
+                try {
+                    ControladorFuncionario.getInstance().incluiFuncionario(nome, dataNascimento, telefone, salario, cargo);
+                } catch (Exception e) {
+                    telaFuncionario.print(e.getMessage());
+                }
+                break;
+            case 2:
+                ArrayList<Cargo> listaCargos1 = ControladorCargo.getInstance().getCargos();
+                if (listaCargos1.isEmpty()) {
+                    telaFuncionario.print("Não há cargos cadastrados. Para prosseguir com o cadastro de funcionários, por favor, cadastre um cargo primeiro.");
+                    ControladorFuncionario.getInstance().inicia();
+                }
+                if (listaFuncionario.isEmpty()) {
+                    telaFuncionario.print("Não há funcionários cadastrados no momento. Por favor, tente cadastrar um funcionário primeiro.");
+                    ControladorFuncionario.getInstance().inicia();
+                }
+                telaFuncionario.print("Insira o número da matrícula: ");
+                while (!telaFuncionario.getScanner().hasNextInt()) {
+                    telaFuncionario.print("Matrícula inválida. Por favor, insira novamente a matrícula: ");
+                    telaFuncionario.getScanner().next();
+                }
+                int matricula = telaFuncionario.getNextIntFromScanner("");
+
+                while (!hasFuncionarioByMatricula(matricula)) {
+                    matricula = telaFuncionario.getNextIntFromScanner("Matrícula inválida. Por favor insira novamente o número da matrícula:");
+                }
+                String nome1 = telaFuncionario.getNextStringFromScanner("Insira o nome:");
+
+                boolean sucess1 = false;
+                Date dataNascimento1 = null;
+                do {
+                    String data = telaFuncionario.getNextStringFromScanner("Insira a data de nascimento(formato dd/MM/yyyy):");
+                    try {
+                        dataNascimento1 = formataData.parse(data);
+                        sucess1 = true;
+                    } catch (Exception e) {
+                        telaFuncionario.print(e.getMessage());
+                    }
+                } while (!sucess1);
+
+                String telefone1 = telaFuncionario.getNextStringFromScanner("Insira o telefone:");
+                telaFuncionario.print("Insira o salário: ");
+                while (!telaFuncionario.getScanner().hasNextInt()) {
+                    telaFuncionario.print("Input inválido. Por favor, insira o salário do novo funcionário: ");
+                    telaFuncionario.getScanner().next();
+                }
+                int salario1 = telaFuncionario.getNextIntFromScanner("");
+                telaFuncionario.print("Selecione o cargo associado ao novo funcionário:");
+                int j = 0;
+                for (Cargo cargo1 : listaCargos1) {
+                    telaFuncionario.print("" + j + " - " + cargo1.getNome());
+                }
+                int opcaoCargo1 = 0;
+                boolean intValido1 = false;
+                do {
+                    while (!telaFuncionario.getScanner().hasNextInt()) {
+                        telaFuncionario.print("Numero inválido. Por favor, selecione um cargo abaixo: ");
+                        for (Cargo cargo1 : listaCargos1) {
+                            telaFuncionario.print("" + j + " - " + cargo1.getNome());
+                        }
+                        telaFuncionario.getScanner().next();
+                    }
+                    opcaoCargo = telaFuncionario.getScanner().nextInt();
+                    if (opcaoCargo < 0 || opcaoCargo > listaCargos1.size()) {
+                        telaFuncionario.print("Numero inválido. Por favor, selecione um cargo abaixo: ");
+                        for (Cargo cargo1 : listaCargos1) {
+                            telaFuncionario.print("" + j + " - " + cargo1.getNome());
+                        }
+                    } else {
+                        intValido1 = true;
+                    }
+                } while (!intValido1);
+                ArrayList<Cargo> listaCargo1 = ControladorCargo.getInstance().getCargos();
+                Cargo cargo1 = listaCargo1.get(opcaoCargo1);
+                try {
+                    ControladorFuncionario.getInstance().modificaFuncionario(matricula, nome1, dataNascimento1, telefone1, salario1, cargo1);
+                } catch (Exception e) {
+                    telaFuncionario.print(e.getMessage());
+                    ControladorPrincipal.getInstance().inicia();
+                }
+                break;
+             */
+        }
+        return null;
+
+    }
 }
