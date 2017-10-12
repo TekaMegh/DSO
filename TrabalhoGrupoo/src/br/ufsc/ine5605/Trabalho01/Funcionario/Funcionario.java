@@ -23,6 +23,7 @@ public class Funcionario {
     private String telefone;
     private int salario;
     private Cargo cargo;
+    private boolean blocked;
     
     public Funcionario(int matricula, String nome, Date nascimento, String telefone, int salario, Cargo cargo){
         this.matricula = matricula;
@@ -31,7 +32,7 @@ public class Funcionario {
         this.telefone = telefone;
         this.salario = salario;
         this.cargo = cargo;
-        
+        blocked = false;
     }
 
     public int getMatricula() {
@@ -76,6 +77,14 @@ public class Funcionario {
 
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
     
 }
