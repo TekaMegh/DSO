@@ -1,64 +1,79 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.ufsc.ine5605.Trabalho01;
 
-import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
 import br.ufsc.ine5605.Trabalho01.Cargos.ControladorCargo;
-import br.ufsc.ine5605.Trabalho01.Cargos.IntervaloDeAcesso;
+import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
 import br.ufsc.ine5605.Trabalho01.Funcionarios.ControladorFuncionario;
-import br.ufsc.ine5605.Trabalho01.Funcionarios.Funcionario;
-import java.util.ArrayList;
 
+/**
+ *
+ * @author rak_w
+ */
 public class ControladorPrincipal {
-
-    private static final ControladorPrincipal controladorPrincipal = new ControladorPrincipal();
+    
+    private static ControladorPrincipal controladorPrincipal;
+    private ControladorCargo ctrlCargo;
+    private ControladorFuncionario ctrlFuncionario;
+    private ControladorAcesso ctrlAcesso;
 
     private TelaPrincipal tela;
-
+    
     public ControladorPrincipal() {
         tela = new TelaPrincipal();
+        ctrlCargo = ControladorCargo.getInstance();
+        ctrlFuncionario = ControladorFuncionario.getInstance();
+        ctrlAcesso = ControladorAcesso.getInstance();
     }
-
+    
+    /**
+     * Mostra a tela principal, e encaminha a opção escolhida para tratamento.
+     */
     public void inicia() {
         int opcao = tela.exibeMenuPrincipal();
-        try {
+        try{
             opcaoSwitch(opcao);
-        } catch (Exception e) {
+        } catch (Exception e){
             tela.print(e.getMessage());
         }
     }
-
-    public void opcaoSwitch(int opcao) {
-        switch(opcao) {
+    /**
+     * Faz o tratamento da opção selecionada.
+     * @param opcao 
+     */
+    public void opcaoSwitch(int opcao){
+        switch(opcao){
             case 1:
-                ControladorAcesso.getInstance().inicia();
+                ctrlAcesso.inicia();
                 break;
             case 2:
-                ControladorCargo.getInstance().inicia();
+                ctrlCargo.inicia();
                 break;
             case 3:
-                ControladorFuncionario.getInstance().inicia();
+                ctrlFuncionario.inicia();
             case 0:
                 System.exit(0);
+                break;
             default:
-                tela.print("Opção inválida.");
-                controladorPrincipal.inicia();
+                tela.printInvalidOptionError();
+                ControladorPrincipal.getInstance().inicia();
         }
     }
 
+    /**
+     * Retorna o controlador Principal.
+     * @return ControladorPrincipal
+     */
     public static ControladorPrincipal getInstance() {
+        if(controladorPrincipal == null){
+             controladorPrincipal = new ControladorPrincipal();
+        }
         return controladorPrincipal;
     }
-
-    public ArrayList<Funcionario> getListaFuncionarios() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Funcionario getFuncionarioByMatricula(int matricula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public ArrayList<IntervaloDeAcesso> getListaIntervaloDeAcessos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
+    
     
 }
