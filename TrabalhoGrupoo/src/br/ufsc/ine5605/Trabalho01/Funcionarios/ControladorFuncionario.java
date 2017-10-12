@@ -5,12 +5,7 @@
  */
 package br.ufsc.ine5605.Trabalho01.Funcionarios;
 
-<<<<<<< HEAD:TrabalhoGrupoo/src/br/ufsc/ine5605/Trabalho01/Funcionario/ControladorFuncionario.java
 import br.ufsc.ine5605.Trabalho01.Cargo.Cargo;
-=======
-import br.ufsc.ine5605.Trabalho01.Cargos.Cargo;
-
->>>>>>> 3e99f788e5b860d86a557a6e01c4b7b6e01076c9:TrabalhoGrupoo/src/br/ufsc/ine5605/Trabalho01/Funcionarios/ControladorFuncionario.java
 import br.ufsc.ine5605.Trabalho01.ControladorPrincipal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
