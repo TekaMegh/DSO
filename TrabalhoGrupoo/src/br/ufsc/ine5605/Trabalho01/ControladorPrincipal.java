@@ -5,8 +5,8 @@
  */
 package br.ufsc.ine5605.Trabalho01;
 
-import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
 import br.ufsc.ine5605.Trabalho01.Cargo.ControladorCargo;
+import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
 import br.ufsc.ine5605.Trabalho01.Funcionario.ControladorFuncionario;
 
 /**
@@ -15,12 +15,18 @@ import br.ufsc.ine5605.Trabalho01.Funcionario.ControladorFuncionario;
  */
 public class ControladorPrincipal {
     
-    private final static ControladorPrincipal controladorPrincipal = new ControladorPrincipal();
+    private static ControladorPrincipal controladorPrincipal;
+    private ControladorCargo ctrlCargo;
+    private ControladorFuncionario ctrlFuncionario;
+    private ControladorAcesso ctrlAcesso;
 
     private TelaPrincipal tela;
     
     public ControladorPrincipal() {
         tela = new TelaPrincipal();
+        ctrlCargo = ControladorCargo.getInstance();
+        ctrlFuncionario = ControladorFuncionario.getInstance();
+        ctrlAcesso = ControladorAcesso.getInstance();
     }
     
     /**
@@ -34,22 +40,26 @@ public class ControladorPrincipal {
             tela.print(e.getMessage());
         }
     }
-    
+    /**
+     * Faz o tratamento da opção selecionada.
+     * @param opcao 
+     */
     public void opcaoSwitch(int opcao){
         switch(opcao){
             case 1:
-                ControladorAcesso.getInstance().inicia();
+                ctrlAcesso.inicia();
                 break;
             case 2:
-                ControladorCargo.getInstance().inicia();
+                ctrlCargo.inicia();
                 break;
             case 3:
-                ControladorFuncionario.getInstance().inicia();
+                ctrlFuncionario.inicia();
             case 0:
                 System.exit(0);
+                break;
             default:
-                tela.print("Opção inválida.");
-                controladorPrincipal.inicia();
+                tela.printInvalidOptionError();
+                ControladorPrincipal.getInstance().inicia();
         }
     }
 
@@ -58,6 +68,9 @@ public class ControladorPrincipal {
      * @return ControladorPrincipal
      */
     public static ControladorPrincipal getInstance() {
+        if(controladorPrincipal == null){
+             controladorPrincipal = new ControladorPrincipal();
+        }
         return controladorPrincipal;
     }
     

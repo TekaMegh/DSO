@@ -31,4 +31,8 @@ public class TelaPrincipal {
     public void print(String mensagem){
         System.out.println(mensagem);
     }
+
+    public void printInvalidOptionError() {
+        System.out.println("Opção inválida.");
+    }
 }
