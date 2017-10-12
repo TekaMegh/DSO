@@ -1,38 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufsc.ine5605.Trabalho01.Entrada;
 
-import br.ufsc.ine5605.Trabalho01.Funcionario.Funcionario;
+import br.ufsc.ine5605.Trabalho01.Cargos.IntervaloDeAcesso;
+import br.ufsc.ine5605.Trabalho01.ControladorPrincipal;
+import br.ufsc.ine5605.Trabalho01.Funcionarios.Funcionario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author rak_w
- */
 public class ControladorAcesso implements IControladorAcesso {
 
     private static ControladorAcesso ctrl;
+
     private ArrayList<Acesso> acessos;
+
     private ArrayList<Funcionario> funcionariosComAcessoNegado;
+
     private TelaAcesso tela;
 
-    /**
-     *
-     * @return Retorna a única instância de Controlador de acesso como um
-     * IControladorAcesso.
-     */
     public ControladorAcesso ControladorAcesso() {
-        acessos = new ArrayList<>();
-        tela = new TelaAcesso();
+        acessos = new ArrayList();
+        tela = new TelaAcesso(this);
         return this;
     }
 
-    public static IControladorAcesso getInstance() {
-
+    public static ControladorAcesso getInstance() {
         if (ctrl == null) {
             ctrl = new ControladorAcesso();
         }
@@ -45,26 +39,66 @@ public class ControladorAcesso implements IControladorAcesso {
     }
 
     @Override
-    public String validaAcesso(int matricula, Date horaDeAcesso) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    public boolean validaHorario(Date now, Date start, Date end) {
-        if (now == null || start == null || end == null) {
-            return false;
+    public TipoAcesso validaAcesso(int matricula, String horaDeAcesso) {
+        
+        Funcionario funcionario = null;
+        ArrayList<Funcionario> listaFuncionarios = ControladorPrincipal.getInstance().getListaFuncionarios();
+        
+        for (Funcionario func : listaFuncionarios) {
+            if(func.getMatricula() == matricula){
+                funcionario = ControladorPrincipal.getInstance().getFuncionarioByMatricula(matricula);
+            }else{
+                return TipoAcesso.SEMMATRICULA;
+            }
         }
-        return now.after(start) && now.before(end);
+
+        if (funcionario.isBlocked()) {
+            return TipoAcesso.ACESSOBLOQUEADO;
+        }else if (!funcionario.getCargo().mayEnter()) {
+            return TipoAcesso.NAOPOSSUIACESSO;
+        }else if (funcionario.getCargo().isGerencial()) {
+            return TipoAcesso.AUTORIZADO;
+        }else{
+            
+            try {
+                if(validaHorario(funcionario, horaDeAcesso)){
+                    return TipoAcesso.AUTORIZADO;
+                }else{
+                    return TipoAcesso.HORARIONAOPERMITIDO;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(ControladorAcesso.class.getName()).log(Level.SEVERE, null, ex);
+            }
+              
+            
+        }
+        return null;
+        
     }
+
+    public boolean validaHorario(Funcionario funcionario, String horaAtual) throws ParseException {
+        Date now, start, end;
+        ArrayList<IntervaloDeAcesso> intervalos = funcionario.getCargo().getIntervalos();
+        SimpleDateFormat formatadorHora= new SimpleDateFormat("HH:mm");
+        now = formatadorHora.parse(horaAtual);
+        
+        for (int i = 0; i < intervalos.size(); i++) {
+            IntervaloDeAcesso get = intervalos.get(i);
+            start = get.getHorarioInicial();
+            end = get.getHorarioFinal();
+            if( ! (now.after(start) && now.before(end)) ){
+                return false;
+            }
+            
+        }
+        
+        return true;
     
-    /**
-     *
-     * @param tipo
-     * @return ArrayList dos acessos filtrados pelo tipo recebido
-     */
+    }
+
     @Override
     public ArrayList<Acesso> getAcessosByTipo(TipoAcesso tipo) {
-        ArrayList<Acesso> listaAcessosByTipo = new ArrayList<>();
+        ArrayList<Acesso> listaAcessosByTipo = new ArrayList();
         for (Acesso acesso : acessos) {
             if (acesso.getTipo() == tipo) {
                 listaAcessosByTipo.add(acesso);
@@ -75,15 +109,11 @@ public class ControladorAcesso implements IControladorAcesso {
 
     @Override
     public ArrayList<Acesso> getAcessosByMatricula(int matricula) {
-
-        ArrayList<Acesso> listaAcessosByMatricula = new ArrayList<>();
-
+        ArrayList<Acesso> listaAcessosByMatricula = new ArrayList();
         for (Funcionario funcionario : funcionariosComAcessoNegado) {
-            
             if (funcionario.getMatricula() == matricula) {
-
                 for (Acesso acesso : acessos) {
-                    if(acesso.getMatricula() == matricula){
+                    if (acesso.getMatricula() == matricula) {
                         listaAcessosByMatricula.add(acesso);
                     }
                 }
@@ -91,5 +121,4 @@ public class ControladorAcesso implements IControladorAcesso {
         }
         return listaAcessosByMatricula;
     }
-
 }

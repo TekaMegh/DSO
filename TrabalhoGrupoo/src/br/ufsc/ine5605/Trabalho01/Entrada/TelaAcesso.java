@@ -1,23 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufsc.ine5605.Trabalho01.Entrada;
 
 import br.ufsc.ine5605.Trabalho01.ControladorPrincipal;
 import java.util.Scanner;
 
-/**
- *
- * @author Avell
- */
 public class TelaAcesso {
+    
+   
+    private ControladorAcesso owner;
+    private Scanner leia;
 
-    private Scanner teclado;
-
-    public TelaAcesso() {
-        teclado = new Scanner(System.in);
+    public TelaAcesso(ControladorAcesso owner) {
+        leia = new Scanner(System.in);
+        this.owner = owner;
     }
 
     public void exibeMenuPrincipal() {
@@ -27,8 +21,8 @@ public class TelaAcesso {
         System.out.println("0 - Menu Anterior");
         System.out.println("----------------------------------------");
         System.out.println("Escolha opcao: ");
-        int opcao = teclado.nextInt();
-        switch (opcao) {
+        int opcao = leia.nextInt();
+        switch(opcao) {
             case 1:
                 this.entrarSetor();
                 break;
@@ -39,11 +33,22 @@ public class TelaAcesso {
                 ControladorPrincipal.getInstance().inicia();
                 break;
         }
-
     }
 
     public void entrarSetor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int matricula;
+        String horaDeAcesso;
+        System.out.println("----------Tela Acesso: Entrar----------");
+        System.out.println("Digite sua matrícula: ");
+        matricula = leia.nextInt();
+        System.out.println("Digite o horario de acesso (HH:mm): ");
+        horaDeAcesso = leia.next();
+        owner.getInstance().validaAcesso(matricula, horaDeAcesso);
+        
+        
+        
+        
+        
     }
 
     private void registros() {
@@ -52,8 +57,8 @@ public class TelaAcesso {
         System.out.println("0 - Voltar");
         System.out.println("----------------------------------------");
         System.out.println("Escolha opcao: ");
-        int opcao = teclado.nextInt();
-        switch (opcao) {
+        int opcao = leia.nextInt();
+        switch(opcao) {
             case 1:
                 this.acessosNegados();
                 break;
@@ -70,16 +75,14 @@ public class TelaAcesso {
         System.out.println("3 - Voltar");
         System.out.println("----------------------------------------");
         System.out.println("Escolha opcao: ");
-        int opcao = teclado.nextInt();
-        switch (opcao) {
+        int opcao = leia.nextInt();
+        switch(opcao) {
             case 1:
                 System.out.println("");
-
             case 2:
                 System.out.println("Digite a matricula: ");
-                int matricula = teclado.nextInt();
+                int matricula = leia.nextInt();
                 System.out.println(ControladorAcesso.getInstance().getAcessosByMatricula(matricula));
-
         }
     }
 }

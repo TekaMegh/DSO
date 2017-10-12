@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,9 +6,9 @@
  */
 package br.ufsc.ine5605.Trabalho01;
 
-import br.ufsc.ine5605.Trabalho01.Cargo.ControladorCargo;
+import br.ufsc.ine5605.Trabalho01.Cargos.ControladorCargo;
 import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
-import br.ufsc.ine5605.Trabalho01.Funcionario.ControladorFuncionario;
+import br.ufsc.ine5605.Trabalho01.Funcionarios.ControladorFuncionario;
 
 /**
  *
