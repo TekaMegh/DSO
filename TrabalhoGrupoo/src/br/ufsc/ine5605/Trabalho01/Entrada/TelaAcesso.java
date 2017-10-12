@@ -4,8 +4,7 @@ import br.ufsc.ine5605.Trabalho01.ControladorPrincipal;
 import java.util.Scanner;
 
 public class TelaAcesso {
-    
-   
+
     private ControladorAcesso owner;
     private Scanner leia;
 
@@ -22,7 +21,7 @@ public class TelaAcesso {
         System.out.println("----------------------------------------");
         System.out.println("Escolha opcao: ");
         int opcao = leia.nextInt();
-        switch(opcao) {
+        switch (opcao) {
             case 1:
                 this.entrarSetor();
                 break;
@@ -43,12 +42,9 @@ public class TelaAcesso {
         matricula = leia.nextInt();
         System.out.println("Digite o horario de acesso (HH:mm): ");
         horaDeAcesso = leia.next();
+        //tratar enum
         owner.getInstance().validaAcesso(matricula, horaDeAcesso);
-        
-        
-        
-        
-        
+
     }
 
     private void registros() {
@@ -58,7 +54,7 @@ public class TelaAcesso {
         System.out.println("----------------------------------------");
         System.out.println("Escolha opcao: ");
         int opcao = leia.nextInt();
-        switch(opcao) {
+        switch (opcao) {
             case 1:
                 this.acessosNegados();
                 break;
@@ -76,7 +72,7 @@ public class TelaAcesso {
         System.out.println("----------------------------------------");
         System.out.println("Escolha opcao: ");
         int opcao = leia.nextInt();
-        switch(opcao) {
+        switch (opcao) {
             case 1:
                 System.out.println("");
             case 2:

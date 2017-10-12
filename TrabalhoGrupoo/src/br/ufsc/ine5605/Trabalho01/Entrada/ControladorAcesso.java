@@ -40,60 +40,58 @@ public class ControladorAcesso implements IControladorAcesso {
 
     @Override
     public TipoAcesso validaAcesso(int matricula, String horaDeAcesso) {
-        
+
         Funcionario funcionario = null;
         ArrayList<Funcionario> listaFuncionarios = ControladorPrincipal.getInstance().getListaFuncionarios();
-        
+
         for (Funcionario func : listaFuncionarios) {
-            if(func.getMatricula() == matricula){
+            if (func.getMatricula() == matricula) {
                 funcionario = ControladorPrincipal.getInstance().getFuncionarioByMatricula(matricula);
-            }else{
+            } else {
                 return TipoAcesso.SEMMATRICULA;
             }
         }
 
         if (funcionario.isBlocked()) {
             return TipoAcesso.ACESSOBLOQUEADO;
-        }else if (!funcionario.getCargo().mayEnter()) {
+        } else if (!funcionario.getCargo().mayEnter()) {
             return TipoAcesso.NAOPOSSUIACESSO;
-        }else if (funcionario.getCargo().isGerencial()) {
+        } else if (funcionario.getCargo().isGerencial()) {
             return TipoAcesso.AUTORIZADO;
-        }else{
-            
+        } else {
+
             try {
-                if(validaHorario(funcionario, horaDeAcesso)){
+                if (validaHorario(funcionario, horaDeAcesso)) {
                     return TipoAcesso.AUTORIZADO;
-                }else{
+                } else {
                     return TipoAcesso.HORARIONAOPERMITIDO;
                 }
             } catch (ParseException ex) {
                 Logger.getLogger(ControladorAcesso.class.getName()).log(Level.SEVERE, null, ex);
             }
-              
-            
+
         }
         return null;
-        
+
     }
 
     public boolean validaHorario(Funcionario funcionario, String horaAtual) throws ParseException {
         Date now, start, end;
         ArrayList<IntervaloDeAcesso> intervalos = funcionario.getCargo().getIntervalos();
-        SimpleDateFormat formatadorHora= new SimpleDateFormat("HH:mm");
+        SimpleDateFormat formatadorHora = new SimpleDateFormat("HH:mm");
         now = formatadorHora.parse(horaAtual);
-        
+
         for (int i = 0; i < intervalos.size(); i++) {
             IntervaloDeAcesso get = intervalos.get(i);
             start = get.getHorarioInicial();
             end = get.getHorarioFinal();
-            if( ! (now.after(start) && now.before(end)) ){
+            if (!(now.after(start) && now.before(end))) {
                 return false;
             }
-            
+
         }
-        
         return true;
-    
+
     }
 
     @Override

@@ -9,6 +9,8 @@ package br.ufsc.ine5605.Trabalho01;
 import br.ufsc.ine5605.Trabalho01.Cargos.ControladorCargo;
 import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
 import br.ufsc.ine5605.Trabalho01.Funcionarios.ControladorFuncionario;
+import br.ufsc.ine5605.Trabalho01.Funcionarios.Funcionario;
+import java.util.ArrayList;
 
 /**
  *
@@ -73,6 +75,14 @@ public class ControladorPrincipal {
              controladorPrincipal = new ControladorPrincipal();
         }
         return controladorPrincipal;
+    }
+
+    public ArrayList<Funcionario> getListaFuncionarios() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Funcionario getFuncionarioByMatricula(int matricula) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

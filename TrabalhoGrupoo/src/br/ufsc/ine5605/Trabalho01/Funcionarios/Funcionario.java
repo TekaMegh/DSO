@@ -69,4 +69,6 @@ public class Funcionario {
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
+
+    
 }
