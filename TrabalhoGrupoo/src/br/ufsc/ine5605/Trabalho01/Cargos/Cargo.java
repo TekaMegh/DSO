@@ -42,6 +42,7 @@ public class Cargo {
     }
 
     public void addIntervalos(IntervaloDeAcesso intervalo) {
+        
         intervalos.add(intervalo);
     }
 

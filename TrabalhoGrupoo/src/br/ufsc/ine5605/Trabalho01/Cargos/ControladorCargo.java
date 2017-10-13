@@ -72,8 +72,8 @@ public class ControladorCargo implements IControladorCargo {
         
         for (Cargo cargo : cargos) {
             if (cargo.getCodigo() == codigo) {
-                IntervaloDeAcesso intervalo = new IntervaloDeAcesso(deHora, ateHora);
-                cargo.addIntervalos(intervalo);
+                
+                cargo.addIntervalos(new IntervaloDeAcesso(deHora, ateHora));
             }
         }
     }

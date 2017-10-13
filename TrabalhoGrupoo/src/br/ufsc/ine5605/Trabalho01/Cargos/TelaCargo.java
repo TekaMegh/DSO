@@ -380,7 +380,7 @@ public class TelaCargo {
         for (IntervaloDeAcesso intervalo : cargo.getIntervalos()) {
             String horaInicial = formatador.format(intervalo.getHorarioInicial());
             String horaFinal = formatador.format(intervalo.getHorarioFinal());
-            intervalos = "-- De "+horaInicial+" à "+horaFinal+" \n";
+            intervalos += "-- De "+horaInicial+" à "+horaFinal+" \n";
         }
         
         return intervalos;
