@@ -17,38 +17,40 @@ import java.util.ArrayList;
  * @author rak_w
  */
 public class ControladorPrincipal {
-    
+
     private static ControladorPrincipal controladorPrincipal;
     private ControladorCargo ctrlCargo;
     private ControladorFuncionario ctrlFuncionario;
     private ControladorAcesso ctrlAcesso;
 
     private TelaPrincipal tela;
-    
+
     public ControladorPrincipal() {
         tela = new TelaPrincipal();
         ctrlCargo = ControladorCargo.getInstance();
         ctrlFuncionario = ControladorFuncionario.getInstance();
         ctrlAcesso = ControladorAcesso.getInstance();
     }
-    
+
     /**
      * Mostra a tela principal, e encaminha a opção escolhida para tratamento.
      */
     public void inicia() {
         int opcao = tela.exibeMenuPrincipal();
-        try{
+        try {
             opcaoSwitch(opcao);
-        } catch (Exception e){
+        } catch (Exception e) {
             tela.print(e.getMessage());
         }
     }
+
     /**
      * Faz o tratamento da opção selecionada.
-     * @param opcao 
+     *
+     * @param opcao
      */
-    public void opcaoSwitch(int opcao){
-        switch(opcao){
+    public void opcaoSwitch(int opcao) {
+        switch (opcao) {
             case 1:
                 ctrlAcesso.inicia();
                 break;
@@ -68,23 +70,39 @@ public class ControladorPrincipal {
 
     /**
      * Retorna o controlador Principal.
+     *
      * @return ControladorPrincipal
      */
     public static ControladorPrincipal getInstance() {
-        if(controladorPrincipal == null){
-             controladorPrincipal = new ControladorPrincipal();
+        if (controladorPrincipal == null) {
+            controladorPrincipal = new ControladorPrincipal();
         }
         return controladorPrincipal;
     }
 
     public ArrayList<Funcionario> getListaFuncionarios() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
+    /**
+     * Percorre lista de funcionarios cadastrados até encontrar um com a
+     * matricula dada.
+     *
+     *
+     * @param matricula
+     * @return funcionario encontrado caso a matrícula exista;
+     * @return null caso não haja funcionario com a mesma matricula;
+     */
     public Funcionario getFuncionarioByMatricula(int matricula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Funcionario> listaFuncionarios = ctrlFuncionario.getInstance().getListaFuncionario();
+
+        for (Funcionario funcionario : listaFuncionarios) {
+            if (funcionario.getMatricula() == matricula) {
+                return funcionario;
+            }
+        }
+        return null;
+
     }
-    
-    
-    
+
 }

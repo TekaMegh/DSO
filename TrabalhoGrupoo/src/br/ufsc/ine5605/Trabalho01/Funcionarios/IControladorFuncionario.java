@@ -9,7 +9,7 @@ package br.ufsc.ine5605.Trabalho01.Funcionarios;
  *
  * @author carcaroff
  */
-import br.ufsc.ine5605.Trabalho01.Cargo.Cargo;
+import br.ufsc.ine5605.Trabalho01.Cargos.Cargo;
 import java.util.Date;
 
 public interface IControladorFuncionario {

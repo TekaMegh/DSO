@@ -13,11 +13,8 @@ import java.util.logging.Logger;
 public class ControladorAcesso implements IControladorAcesso {
 
     private static ControladorAcesso ctrl;
-
+    SimpleDateFormat formatadorHora = new SimpleDateFormat("HH:mm");
     private ArrayList<Acesso> acessos;
-
-    private ArrayList<Funcionario> funcionariosComAcessoNegado;
-
     private TelaAcesso tela;
 
     public ControladorAcesso ControladorAcesso() {
@@ -53,9 +50,21 @@ public class ControladorAcesso implements IControladorAcesso {
         }
 
         if (funcionario.isBlocked()) {
+            try {
+                acessos.add(new Acesso(TipoAcesso.ACESSOBLOQUEADO, matricula, formatadorHora.parse(horaDeAcesso)));
+            } catch (ParseException ex) {
+                Logger.getLogger(ControladorAcesso.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return TipoAcesso.ACESSOBLOQUEADO;
+            
         } else if (!funcionario.getCargo().mayEnter()) {
+            try {
+                acessos.add(new Acesso(TipoAcesso.NAOPOSSUIACESSO, matricula, formatadorHora.parse(horaDeAcesso)));
+            } catch (ParseException ex) {
+                Logger.getLogger(ControladorAcesso.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return TipoAcesso.NAOPOSSUIACESSO;
+            
         } else if (funcionario.getCargo().isGerencial()) {
             return TipoAcesso.AUTORIZADO;
         } else {
@@ -64,6 +73,7 @@ public class ControladorAcesso implements IControladorAcesso {
                 if (validaHorario(funcionario, horaDeAcesso)) {
                     return TipoAcesso.AUTORIZADO;
                 } else {
+                    acessos.add(new Acesso(TipoAcesso.HORARIONAOPERMITIDO, matricula, formatadorHora.parse(horaDeAcesso)));
                     return TipoAcesso.HORARIONAOPERMITIDO;
                 }
             } catch (ParseException ex) {
@@ -78,7 +88,7 @@ public class ControladorAcesso implements IControladorAcesso {
     public boolean validaHorario(Funcionario funcionario, String horaAtual) throws ParseException {
         Date now, start, end;
         ArrayList<IntervaloDeAcesso> intervalos = funcionario.getCargo().getIntervalos();
-        SimpleDateFormat formatadorHora = new SimpleDateFormat("HH:mm");
+        
         now = formatadorHora.parse(horaAtual);
 
         for (int i = 0; i < intervalos.size(); i++) {
@@ -108,13 +118,9 @@ public class ControladorAcesso implements IControladorAcesso {
     @Override
     public ArrayList<Acesso> getAcessosByMatricula(int matricula) {
         ArrayList<Acesso> listaAcessosByMatricula = new ArrayList();
-        for (Funcionario funcionario : funcionariosComAcessoNegado) {
-            if (funcionario.getMatricula() == matricula) {
-                for (Acesso acesso : acessos) {
-                    if (acesso.getMatricula() == matricula) {
-                        listaAcessosByMatricula.add(acesso);
-                    }
-                }
+        for (Acesso acesso : acessos) {
+            if (acesso.getMatricula() == matricula) {
+                listaAcessosByMatricula.add(acesso);
             }
         }
         return listaAcessosByMatricula;
