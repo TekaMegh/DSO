@@ -17,16 +17,17 @@ public class ControladorAcesso implements IControladorAcesso {
     private ArrayList<Acesso> acessos;
     private TelaAcesso tela;
 
-    public ControladorAcesso ControladorAcesso() {
-        acessos = new ArrayList();
+    private ControladorAcesso() {
+        acessos = new ArrayList<>();
         tela = new TelaAcesso(this);
-        return this;
     }
 
     public static ControladorAcesso getInstance() {
         if (ctrl == null) {
+
             ctrl = new ControladorAcesso();
         }
+
         return ctrl;
     }
 
@@ -39,24 +40,30 @@ public class ControladorAcesso implements IControladorAcesso {
     public TipoAcesso validaAcesso(int matricula, String horaDeAcesso) {
 
         Funcionario funcionario = null;
+
         ArrayList<Funcionario> listaFuncionarios = ControladorPrincipal.getInstance().getListaFuncionarios();
 
+//consertar com hasFuncionario
+        boolean hasFuncionario = false;
         for (Funcionario func : listaFuncionarios) {
             if (func.getMatricula() == matricula) {
                 funcionario = ControladorPrincipal.getInstance().getFuncionarioByMatricula(matricula);
-            } else {
-                return TipoAcesso.SEMMATRICULA;
+                hasFuncionario = true;
             }
+        }
+        if (!hasFuncionario) {
+            return TipoAcesso.SEMMATRICULA;
         }
 
         if (funcionario.isBlocked()) {
             try {
                 acessos.add(new Acesso(TipoAcesso.ACESSOBLOQUEADO, matricula, formatadorHora.parse(horaDeAcesso)));
             } catch (ParseException ex) {
-                Logger.getLogger(ControladorAcesso.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(ControladorAcesso.class.getName()).log(Level.SEVERE, null, ex);
+
             }
             return TipoAcesso.ACESSOBLOQUEADO;
-            
+
         } else if (!funcionario.getCargo().mayEnter()) {
             try {
                 acessos.add(new Acesso(TipoAcesso.NAOPOSSUIACESSO, matricula, formatadorHora.parse(horaDeAcesso)));
@@ -64,7 +71,7 @@ public class ControladorAcesso implements IControladorAcesso {
                 Logger.getLogger(ControladorAcesso.class.getName()).log(Level.SEVERE, null, ex);
             }
             return TipoAcesso.NAOPOSSUIACESSO;
-            
+
         } else if (funcionario.getCargo().isGerencial()) {
             return TipoAcesso.AUTORIZADO;
         } else {
@@ -81,6 +88,7 @@ public class ControladorAcesso implements IControladorAcesso {
             }
 
         }
+
         return null;
 
     }
@@ -88,7 +96,7 @@ public class ControladorAcesso implements IControladorAcesso {
     public boolean validaHorario(Funcionario funcionario, String horaAtual) throws ParseException {
         Date now, start, end;
         ArrayList<IntervaloDeAcesso> intervalos = funcionario.getCargo().getIntervalos();
-        
+
         now = formatadorHora.parse(horaAtual);
 
         for (int i = 0; i < intervalos.size(); i++) {

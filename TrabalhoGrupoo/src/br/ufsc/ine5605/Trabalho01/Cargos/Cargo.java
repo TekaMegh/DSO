@@ -18,7 +18,7 @@ public class Cargo {
         this.codigo = codigo;
         this.nome = nome;
         this.mayEnter = mayEnter;
-        this.intervalos = new ArrayList();
+        this.intervalos = new ArrayList<>();
     }
 
     public int getCodigo() {

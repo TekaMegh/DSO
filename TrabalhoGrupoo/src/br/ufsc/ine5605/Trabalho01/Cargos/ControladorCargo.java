@@ -69,9 +69,10 @@ public class ControladorCargo implements IControladorCargo {
     }
 
     public void setIntervaloInCargoByCodigo(int codigo, String deHora, String ateHora) {
-        IntervaloDeAcesso intervalo = new IntervaloDeAcesso(deHora, ateHora);
+        
         for (Cargo cargo : cargos) {
             if (cargo.getCodigo() == codigo) {
+                IntervaloDeAcesso intervalo = new IntervaloDeAcesso(deHora, ateHora);
                 cargo.addIntervalos(intervalo);
             }
         }
@@ -109,5 +110,11 @@ public class ControladorCargo implements IControladorCargo {
                 cargo.setCodigo(novoCodigo);
             }
         }
+    }
+
+    public Cargo chooseCargo() {
+        
+        return this.tela.chooseCargo();
+        
     }
 }

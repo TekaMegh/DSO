@@ -5,6 +5,9 @@
 package br.ufsc.ine5605.Trabalho01.Cargos;
 
 import br.ufsc.ine5605.Trabalho01.ControladorPrincipal;
+import br.ufsc.ine5605.Trabalho01.Funcionarios.Funcionario;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -35,26 +38,33 @@ public class TelaCargo {
             case 1:
 
                 this.cadastroCargo();
-
+                break;
             case 2:
 
                 this.visualizaCargos();
-
+                break;
             case 3:
+                
                 System.out.println("------------Tela de Cargos--------------");
                 System.out.println("Codigo do cargo que gostaria de modificar: ");
                 int codigo = leia.nextInt();
-                this.modificaCargo(codigo);
-
+                for (Cargo cargo : owner.getCargos()) {
+                    if(cargo.getCodigo() == codigo){
+                        this.modificaCargo(codigo);
+                        break;
+                    }
+                }   
+                System.out.println("Cargo nao existente.");
+                this.mostrarTela();
+                break;
             case 0:
-
                 ControladorPrincipal.getInstance().inicia();
-
+                break;
             default:
 
                 System.out.println("Opcao invalida");
                 owner.inicia();
-
+                break;
         }
 
     }
@@ -65,7 +75,8 @@ public class TelaCargo {
         String nomeCargo;
         System.out.println("------------Tela de Cargos--------------");
         System.out.println("Nome do novo cargo: ");
-        nomeCargo = leia.next();
+        leia.nextLine();
+        nomeCargo = leia.nextLine();
         System.out.println("Esse cargo possui acesso ao financeiro?");
         System.out.println("1- Sim");
         System.out.println("2- Nao");
@@ -89,15 +100,16 @@ public class TelaCargo {
 
     }
 
-    public void visualizaCargos() {
+    public void visualizaCargos() throws Exception {
         System.out.println("Os cargos já cadastrados são: ");
         for (Cargo cargo : owner.getCargos()) {
-            System.out.println("" + cargo.getNome() + "");
+            System.out.println("Cargo: " + cargo.getNome() + " - Código: "+cargo.getCodigo()+" ");
+            System.out.println(printIntervalosByCargo(cargo));
         }
-
+        this.mostrarTela();
     }
 
-    public void modificaCargo(int codigo) throws Exception {
+    public void modificaCargo(int codigo) throws Exception{
 
         System.out.println("----------Modificacao do cargo: " + owner.getCargoByCodigo(codigo).getNome() + "----------");
         System.out.println("1- Mudar nome");
@@ -110,10 +122,10 @@ public class TelaCargo {
                 String nome = leia.next();
                 if (!owner.hasNome(nome)) {
                     owner.setNomeInCargoByCodigo(codigo, nome);
-                    System.out.println("nome alterado com sucesso.");
-                    this.modificaCargo(codigo);
+                    System.out.println("Nome alterado com sucesso.");
+                    this.mostrarTela();
                 } else {
-                    System.out.println("nome já existente.");
+                    System.out.println("Mome já existente. Por favor escolha outro.");
                     this.modificaCargo(codigo);
                 }
             case 2:
@@ -122,7 +134,7 @@ public class TelaCargo {
                 if (!owner.hasCodigo(novoCodigo)) {
                     owner.setCodigoInCargoByCodigo(codigo, novoCodigo);
                     System.out.println("Código alterado com sucesso.");
-                    this.modificaCargo(codigo);
+                    this.mostrarTela();
                 } else {
                     System.out.println("Código já existente.");
                     this.modificaCargo(codigo);
@@ -136,7 +148,7 @@ public class TelaCargo {
         System.out.println("----------Cadstro de intervalo----------");
         System.out.println("Em que intervalo(s) de tempo ele possui acesso?");
         System.out.println("1- Esse é um cargo gerencial (Sempre)");
-        System.out.println("2- Horário comercial (Das 08:00 às 18:00)");
+        System.out.println("2- Horário comercial (Das 08:00 às 12:00 e 14:00 às 18:00)");
         System.out.println("3- Outro (cadastrar novo(s) intervalo(s))");
         int opcao = leia.nextInt();
         switch (opcao) {
@@ -148,7 +160,8 @@ public class TelaCargo {
 
             case 2:
 
-                owner.setIntervaloInCargoByCodigo(cargo.getCodigo(), "08:00", "18:00");
+                owner.setIntervaloInCargoByCodigo(cargo.getCodigo(), "08:00", "12:00");
+                owner.setIntervaloInCargoByCodigo(cargo.getCodigo(), "14:00", "18:00");
                 System.out.println("O cargo " + cargo.getNome() + " foi registrado com acesso em horário comercial.");
                 this.mostrarTela();
                 break;
@@ -345,5 +358,31 @@ public class TelaCargo {
         }
         return null;
 
+    }
+
+    public Cargo chooseCargo() {
+        ArrayList<Cargo> cargos = owner.getCargos();
+        System.out.println("Escolha um cargo: ");
+        for (int i = 1; i <= cargos.size(); i++) {
+            Cargo cargo = cargos.get(i-1);
+            System.out.println(i +" - "+cargo.getNome()+"");
+        }
+        int opcao = leia.nextInt();
+        return cargos.get(opcao-1);
+        
+        
+    }
+
+    private String printIntervalosByCargo(Cargo cargo) {
+        String intervalos = "";
+        DateFormat formatador = new SimpleDateFormat("HH:mm");
+        
+        for (IntervaloDeAcesso intervalo : cargo.getIntervalos()) {
+            String horaInicial = formatador.format(intervalo.getHorarioInicial());
+            String horaFinal = formatador.format(intervalo.getHorarioFinal());
+            intervalos = "-- De "+horaInicial+" à "+horaFinal+" \n";
+        }
+        
+        return intervalos;
     }
 }

@@ -1,6 +1,10 @@
 package br.ufsc.ine5605.Trabalho01.Entrada;
 
 import br.ufsc.ine5605.Trabalho01.ControladorPrincipal;
+import java.text.DateFormat;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TelaAcesso {
@@ -14,6 +18,7 @@ public class TelaAcesso {
     }
 
     public void exibeMenuPrincipal() {
+        
         System.out.println("----------Tela Acesso----------");
         System.out.println("1 - Entrar no setor financeiro");
         System.out.println("2 - Registros de Acessos");
@@ -28,8 +33,12 @@ public class TelaAcesso {
             case 2:
                 this.registros();
                 break;
-            case 3:
+            case 0:
                 ControladorPrincipal.getInstance().inicia();
+                break;
+            default:
+                System.out.println("Opcão inválida");
+                this.exibeMenuPrincipal();
                 break;
         }
     }
@@ -42,9 +51,32 @@ public class TelaAcesso {
         matricula = leia.nextInt();
         System.out.println("Digite o horario de acesso (HH:mm): ");
         horaDeAcesso = leia.next();
-        //tratar enum
-        owner.getInstance().validaAcesso(matricula, horaDeAcesso);
+        
+        
+        switch (owner.getInstance().validaAcesso(matricula, horaDeAcesso)){
+            case AUTORIZADO:
+                System.out.println(TipoAcesso.AUTORIZADO.descricao());
+                break;
+            case ACESSOBLOQUEADO:
+                System.out.println(TipoAcesso.ACESSOBLOQUEADO.descricao());
+                System.out.println("Por favor, tente novamente.");
+                break;
 
+            case HORARIONAOPERMITIDO:
+                System.out.println(TipoAcesso.HORARIONAOPERMITIDO.descricao());
+                System.out.println("Por favor, tente novamente.");
+                break;
+            case NAOPOSSUIACESSO:
+                System.out.println(TipoAcesso.NAOPOSSUIACESSO.descricao());
+                System.out.println("Por favor, tente novamente.");
+                break;
+            case SEMMATRICULA:
+                System.out.println(TipoAcesso.SEMMATRICULA.descricao());
+                System.out.println("Por favor, tente novamente.");
+                break;
+        }
+        
+        this.exibeMenuPrincipal();
     }
 
     private void registros() {
@@ -78,7 +110,18 @@ public class TelaAcesso {
             case 2:
                 System.out.println("Digite a matricula: ");
                 int matricula = leia.nextInt();
-                System.out.println(ControladorAcesso.getInstance().getAcessosByMatricula(matricula));
+                ArrayList<Acesso> lista = ControladorAcesso.getInstance().getAcessosByMatricula(matricula);
+                DateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                System.out.println("Acessos negados por "+ControladorPrincipal.getInstance().getFuncionarioByMatricula(matricula).getNome()+": ");
+                for (Acesso acesso : lista) {
+                    if(acesso.getMatricula() == matricula){
+                        System.out.println("--------- ");
+                        String data = formatador.format(acesso.getDataDaTentativa());
+                        System.out.println("-- Hora da Tentativa de acesso: "+data+" motivo: "+acesso.getTipo().descricao()+"");
+                    }
+                    
+                }
+                
         }
     }
 }

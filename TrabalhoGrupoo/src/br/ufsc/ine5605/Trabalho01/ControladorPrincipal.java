@@ -6,6 +6,7 @@
  */
 package br.ufsc.ine5605.Trabalho01;
 
+import br.ufsc.ine5605.Trabalho01.Cargos.Cargo;
 import br.ufsc.ine5605.Trabalho01.Cargos.ControladorCargo;
 import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
 import br.ufsc.ine5605.Trabalho01.Funcionarios.ControladorFuncionario;
@@ -33,6 +34,18 @@ public class ControladorPrincipal {
     }
 
     /**
+     * Retorna o controlador Principal.
+     *
+     * @return ControladorPrincipal
+     */
+    public static ControladorPrincipal getInstance() {
+        if (controladorPrincipal == null) {
+            controladorPrincipal = new ControladorPrincipal();
+        }
+        return controladorPrincipal;
+    }
+
+    /**
      * Mostra a tela principal, e encaminha a opção escolhida para tratamento.
      */
     public void inicia() {
@@ -50,6 +63,7 @@ public class ControladorPrincipal {
      * @param opcao
      */
     public void opcaoSwitch(int opcao) {
+
         switch (opcao) {
             case 1:
                 ctrlAcesso.inicia();
@@ -68,20 +82,8 @@ public class ControladorPrincipal {
         }
     }
 
-    /**
-     * Retorna o controlador Principal.
-     *
-     * @return ControladorPrincipal
-     */
-    public static ControladorPrincipal getInstance() {
-        if (controladorPrincipal == null) {
-            controladorPrincipal = new ControladorPrincipal();
-        }
-        return controladorPrincipal;
-    }
-
     public ArrayList<Funcionario> getListaFuncionarios() {
-
+        return ctrlFuncionario.getListaFuncionario();
     }
 
     /**
@@ -94,14 +96,21 @@ public class ControladorPrincipal {
      * @return null caso não haja funcionario com a mesma matricula;
      */
     public Funcionario getFuncionarioByMatricula(int matricula) {
-        ArrayList<Funcionario> listaFuncionarios = ctrlFuncionario.getInstance().getListaFuncionario();
+        ArrayList<Funcionario> listaFuncionarios = ctrlFuncionario.getListaFuncionario();
 
         for (Funcionario funcionario : listaFuncionarios) {
             if (funcionario.getMatricula() == matricula) {
                 return funcionario;
             }
         }
+
         return null;
+
+    }
+
+    public Cargo chooseCargo() {
+        
+        return ctrlCargo.chooseCargo();
 
     }
 
