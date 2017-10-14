@@ -115,7 +115,11 @@ public class ControladorPrincipal {
     }
 
     public boolean hasFuncionarioByCargo(Cargo cargo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean hasFuncionario = ctrlFuncionario.hasFuncionarioByCargo(cargo);
+        if(hasFuncionario){
+            ctrlFuncionario.printFuncionarioByCargo(cargo);
+        }
+        return hasFuncionario;
     }
 
 }
