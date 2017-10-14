@@ -6,9 +6,9 @@ public interface IControladorCargo {
 
     public void inicia();
 
-    public void incluiCargo(String nome, boolean mayEnter);
+    public Cargo incluiCargo(String nome, boolean mayEnter);
 
-    public void removeCargoByCodigo(int codigo);
+    public void removeCargoByCodigo(int codigo) throws Exception;
 
     public ArrayList<Cargo> getCargos();
 }

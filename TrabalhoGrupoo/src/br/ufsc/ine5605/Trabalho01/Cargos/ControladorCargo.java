@@ -30,24 +30,25 @@ public class ControladorCargo implements IControladorCargo {
         }
     }
 
+    /**
+     *
+     * @param nome
+     * @param mayEnter
+     * @return
+     */
     @Override
-    public void incluiCargo(String nome, boolean mayEnter) {
+    public Cargo incluiCargo(String nome, boolean mayEnter) {
         boolean codigoExiste = false;
         do {
-            codigoExiste = false;
-            for (Cargo cargo : cargos) {
-                if (cargo.getCodigo() == numCodigo) {
-                    codigoExiste = true;
-                }
-            }
-            if (codigoExiste == false) {
-                Cargo cargo = new Cargo(this.numCodigo, nome, mayEnter);
-                this.numCodigo += 1;
-                cargos.add(cargo);
-            } else if (codigoExiste) {
+            codigoExiste = this.hasCodigo(numCodigo);
+            if (codigoExiste) {
                 this.numCodigo += 1;
             }
         } while (codigoExiste);
+        Cargo cargo = new Cargo(this.numCodigo, nome, mayEnter);
+        this.numCodigo += 1;
+        this.cargos.add(cargo);
+        return cargo;
     }
 
     @Override
@@ -55,14 +56,18 @@ public class ControladorCargo implements IControladorCargo {
         return this.cargos;
     }
 
+    /**
+     *
+     * @param codigo
+     * @throws Exception
+     */
     @Override
-    public void removeCargoByCodigo(int codigo) {
+    public void removeCargoByCodigo(int codigo) throws Exception {
         Cargo cargo = this.getCargoByCodigo(codigo);
         boolean hasFuncionario = ControladorPrincipal.getInstance().hasFuncionarioByCargo(cargo);
         if (!hasFuncionario) {
             cargos.remove(cargo);
         }
-        
     }
 
     public Cargo getCargoByNome(String nomeCargo) throws Exception {
@@ -71,34 +76,37 @@ public class ControladorCargo implements IControladorCargo {
                 return cargo;
             }
         }
-        throw new Exception("Cargo não existe");
+        throw new Exception("Código de cargo inexistente");
     }
 
     public Cargo getCargoByCodigo(int codigo) throws Exception {
         for (Cargo cargo : cargos) {
             if (cargo.getCodigo() == codigo) {
+                    
                 return cargo;
             }
         }
-        throw new Exception("Cargo não existe");
+        throw new Exception("Código de cargo inexistente");
     }
 
-    public void setIntervaloInCargoByCodigo(int codigo, String deHora, String ateHora) {
-
-        for (Cargo cargo : cargos) {
-            if (cargo.getCodigo() == codigo) {
-
-                cargo.addIntervalos(new IntervaloDeAcesso(deHora, ateHora));
-            }
-        }
+    public void setIntervaloInCargoByCodigo(int codigo, String deHora, String ateHora) throws Exception {
+        Cargo cargo = this.getCargoByCodigo(codigo);
+        cargo.addIntervalo(deHora, ateHora);
+    }
+    
+    public void removeIntervalosByCodigo(int codigo, IntervaloDeAcesso intervalo) throws Exception {
+        Cargo cargo = this.getCargoByCodigo(codigo);
+        cargo.removeIntervalo(intervalo);
+    }
+    
+    public ArrayList<IntervaloDeAcesso> getIntervalosByCodigo(int codigo) throws Exception {
+        Cargo cargo = this.getCargoByCodigo(codigo);
+        return cargo.getIntervalos();
     }
 
-    public void setNomeInCargoByCodigo(int codigo, String nome) {
-        for (Cargo cargo : cargos) {
-            if (cargo.getCodigo() == codigo) {
-                cargo.setNome(nome);
-            }
-        }
+    public void setNomeInCargoByCodigo(int codigo, String nome) throws Exception {
+        Cargo cargo = this.getCargoByCodigo(codigo);
+        cargo.setNome(nome);
     }
 
     public boolean hasNome(String nome) {
@@ -119,12 +127,9 @@ public class ControladorCargo implements IControladorCargo {
         return false;
     }
 
-    public void setCodigoInCargoByCodigo(int codigo, int novoCodigo) {
-        for (Cargo cargo : cargos) {
-            if (cargo.getCodigo() == codigo) {
-                cargo.setCodigo(novoCodigo);
-            }
-        }
+    public void setCodigoInCargoByCodigo(int codigo, int novoCodigo) throws Exception {
+        Cargo cargo = this.getCargoByCodigo(codigo);
+        cargo.setCodigo(novoCodigo);
     }
 
     public Cargo chooseCargo() throws Exception {
@@ -136,5 +141,14 @@ public class ControladorCargo implements IControladorCargo {
             controladorCargo = new ControladorCargo();
         }
         return controladorCargo;
+    }
+
+    public boolean hasCargo() {
+        ArrayList<Cargo> listaCargos = this.getCargos();
+        if (listaCargos.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

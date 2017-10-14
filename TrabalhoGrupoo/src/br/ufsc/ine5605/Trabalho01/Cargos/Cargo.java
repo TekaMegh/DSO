@@ -42,9 +42,13 @@ public class Cargo {
         return intervalos;
     }
 
-    public void addIntervalos(IntervaloDeAcesso intervalo) {
-        
+    public void addIntervalo(String horaInicial, String horaFinal) {
+        IntervaloDeAcesso intervalo = new IntervaloDeAcesso(horaInicial, horaFinal);
         intervalos.add(intervalo);
+    }
+    
+    public void removeIntervalo(IntervaloDeAcesso intervalo) {
+        intervalos.remove(intervalo);
     }
 
     public boolean isGerencial() {
