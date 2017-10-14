@@ -26,6 +26,11 @@ public class TelaCargo {
         this.owner = owner;
     }
 
+    /**
+     * Mostra a tela do menu de cargos.
+     * 
+     * @throws Exception 
+     */
     public void mostrarTela() throws Exception {
 
         System.out.println("------------Tela de Cargos--------------");
@@ -34,15 +39,27 @@ public class TelaCargo {
         System.out.println("3- Modificar cargo existente por código");
         System.out.println("0- Voltar");
         int opcao = leia.nextInt();
+        /**
+         * Tratamento das opções da tela.
+         */
         switch (opcao) {
+            /**
+             * Redireciona para o cadastro de cargos.
+             */
             case 1:
 
                 this.cadastroCargo();
                 break;
+            /**
+             * Redireciona para a exibição dos cargos existentes.
+             */
             case 2:
 
                 this.visualizaCargos();
                 break;
+            /**
+             * 
+             */
             case 3:
                 
                 System.out.println("------------Tela de Cargos--------------");
@@ -147,7 +164,7 @@ public class TelaCargo {
 
         System.out.println("----------Cadstro de intervalo----------");
         System.out.println("Em que intervalo(s) de tempo ele possui acesso?");
-        System.out.println("1- Esse é um cargo gerencial (Sempre)");
+        System.out.println("1- Esse é um cargo gerencial (Livre acesso ao Financeiro)");
         System.out.println("2- Horário comercial (Das 08:00 às 12:00 e 14:00 às 18:00)");
         System.out.println("3- Outro (cadastrar novo(s) intervalo(s))");
         int opcao = leia.nextInt();

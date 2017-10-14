@@ -108,10 +108,14 @@ public class ControladorPrincipal {
 
     }
 
-    public Cargo chooseCargo() {
+    public Cargo chooseCargo() throws Exception {
         
         return ctrlCargo.chooseCargo();
 
+    }
+
+    public boolean hasFuncionarioByCargo(Cargo cargo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

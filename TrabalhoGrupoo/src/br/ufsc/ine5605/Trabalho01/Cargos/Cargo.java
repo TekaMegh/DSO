@@ -19,12 +19,13 @@ public class Cargo {
         this.nome = nome;
         this.mayEnter = mayEnter;
         this.intervalos = new ArrayList<>();
+        this.gerencial = false;
     }
 
     public int getCodigo() {
         return this.codigo;
     }
-
+    
     public String getNome() {
         return this.nome;
     }

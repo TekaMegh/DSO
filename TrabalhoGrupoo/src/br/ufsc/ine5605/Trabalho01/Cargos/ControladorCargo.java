@@ -1,22 +1,23 @@
 package br.ufsc.ine5605.Trabalho01.Cargos;
 
+import br.ufsc.ine5605.Trabalho01.ControladorPrincipal;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ControladorCargo implements IControladorCargo {
 
-    private static final ControladorCargo controladorCargo = new ControladorCargo();
+    private static ControladorCargo controladorCargo = new ControladorCargo();
 
     private TelaCargo tela;
 
-    private ArrayList<Cargo> cargos = new ArrayList();
+    private ArrayList<Cargo> cargos;
 
     private int numCodigo;
 
     public ControladorCargo() {
         this.tela = new TelaCargo(this);
-        this.cargos = new ArrayList();
+        this.cargos = new ArrayList<>();
         this.numCodigo = 1;
     }
 
@@ -31,9 +32,22 @@ public class ControladorCargo implements IControladorCargo {
 
     @Override
     public void incluiCargo(String nome, boolean mayEnter) {
-        Cargo cargo = new Cargo(this.numCodigo, nome, mayEnter);
-        this.numCodigo += 1;
-        cargos.add(cargo);
+        boolean codigoExiste = false;
+        do {
+            codigoExiste = false;
+            for (Cargo cargo : cargos) {
+                if (cargo.getCodigo() == numCodigo) {
+                    codigoExiste = true;
+                }
+            }
+            if (codigoExiste == false) {
+                Cargo cargo = new Cargo(this.numCodigo, nome, mayEnter);
+                this.numCodigo += 1;
+                cargos.add(cargo);
+            } else if (codigoExiste) {
+                this.numCodigo += 1;
+            }
+        } while (codigoExiste);
     }
 
     @Override
@@ -41,13 +55,14 @@ public class ControladorCargo implements IControladorCargo {
         return this.cargos;
     }
 
-    public static ControladorCargo getInstance() {
-        return controladorCargo;
-    }
-
     @Override
     public void removeCargoByCodigo(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Cargo cargo = this.getCargoByCodigo(codigo);
+        boolean hasFuncionario = ControladorPrincipal.getInstance().hasFuncionarioByCargo(cargo);
+        if (!hasFuncionario) {
+            cargos.remove(cargo);
+        }
+        
     }
 
     public Cargo getCargoByNome(String nomeCargo) throws Exception {
@@ -69,10 +84,10 @@ public class ControladorCargo implements IControladorCargo {
     }
 
     public void setIntervaloInCargoByCodigo(int codigo, String deHora, String ateHora) {
-        
+
         for (Cargo cargo : cargos) {
             if (cargo.getCodigo() == codigo) {
-                
+
                 cargo.addIntervalos(new IntervaloDeAcesso(deHora, ateHora));
             }
         }
@@ -112,9 +127,14 @@ public class ControladorCargo implements IControladorCargo {
         }
     }
 
-    public Cargo chooseCargo() {
-        
+    public Cargo chooseCargo() throws Exception {
         return this.tela.chooseCargo();
-        
+    }
+
+    public static ControladorCargo getInstance() {
+        if (controladorCargo == null) {
+            controladorCargo = new ControladorCargo();
+        }
+        return controladorCargo;
     }
 }
