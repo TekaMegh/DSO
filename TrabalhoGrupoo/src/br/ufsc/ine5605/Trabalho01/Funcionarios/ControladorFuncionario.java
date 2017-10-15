@@ -51,8 +51,9 @@ public class ControladorFuncionario implements IControladorFuncionario {
                 String nome = null;
                 boolean hasFuncionarioByNome = false;
                 do {
+
                     nome = telaFuncionario.printGetNome();
-                    hasFuncionarioByNome = ControladorFuncionario.getInstance().hasFuncionarioByNome(nome);
+                    hasFuncionarioByNome = controladorFuncionario.hasFuncionarioByNome(nome);
                     if (hasFuncionarioByNome) {
                         telaFuncionario.printNameAlreadyExistsError();
                     }
@@ -181,9 +182,11 @@ public class ControladorFuncionario implements IControladorFuncionario {
                 //Volta para o menu principal
                 telaFuncionario.printReturnMainMenu();
                 ControladorPrincipal.getInstance().inicia();
+                break;
             default:
                 telaFuncionario.printInvalidOptionError();
                 ControladorFuncionario.getInstance().inicia();
+                break;
         }
     }
 
@@ -352,7 +355,6 @@ public class ControladorFuncionario implements IControladorFuncionario {
     public boolean hasFuncionarioByCargo(Cargo cargo) {
         for(Funcionario funcionario: listaFuncionario){
             if(funcionario.getCargo().equals(cargo)){
-                printFuncionarioByCargo(cargo);
                 return true;
             }
         }

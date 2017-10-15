@@ -43,15 +43,9 @@ public class ControladorAcesso implements IControladorAcesso {
 
         ArrayList<Funcionario> listaFuncionarios = ControladorPrincipal.getInstance().getListaFuncionarios();
 
-//consertar com hasFuncionario
-        boolean hasFuncionario = false;
-        for (Funcionario func : listaFuncionarios) {
-            if (func.getMatricula() == matricula) {
-                funcionario = ControladorPrincipal.getInstance().getFuncionarioByMatricula(matricula);
-                hasFuncionario = true;
-            }
-        }
-        if (!hasFuncionario) {
+        if (ControladorPrincipal.getInstance().hasFuncionarioByMatricula(matricula)) {
+            funcionario = ControladorPrincipal.getInstance().getFuncionarioByMatricula(matricula);
+        } else{
             return TipoAcesso.SEMMATRICULA;
         }
 
@@ -60,7 +54,7 @@ public class ControladorAcesso implements IControladorAcesso {
                 acessos.add(new Acesso(TipoAcesso.ACESSOBLOQUEADO, matricula, formatadorHora.parse(horaDeAcesso)));
             } catch (ParseException ex) {
                 //Logger.getLogger(ControladorAcesso.class.getName()).log(Level.SEVERE, null, ex);
-
+                System.out.println("OPA A DATA BUGOU");
             }
             return TipoAcesso.ACESSOBLOQUEADO;
 
