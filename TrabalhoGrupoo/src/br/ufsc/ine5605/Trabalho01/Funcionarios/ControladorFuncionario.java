@@ -80,7 +80,12 @@ public class ControladorFuncionario implements IControladorFuncionario {
                 int salario = telaFuncionario.printGetSalario();
 
                 //Parte 5 - Cargo;
-                Cargo cargo = ControladorPrincipal.getInstance().chooseCargo();
+                Cargo cargo = null;
+                try{
+                    cargo = ControladorPrincipal.getInstance().chooseCargo();
+                } catch(Exception e){
+                    telaFuncionario.printExceptionMessage(e);
+                }
 
                 try {
                     ControladorFuncionario.getInstance().incluiFuncionario(nome, dataNascimento, telefone, salario, cargo);
@@ -127,7 +132,12 @@ public class ControladorFuncionario implements IControladorFuncionario {
                 salario = telaFuncionario.printGetSalario();
 
                 //Parte 6 - Cargo
-                cargo = ControladorPrincipal.getInstance().chooseCargo();
+                cargo = null;
+                try{
+                    cargo = ControladorPrincipal.getInstance().chooseCargo();
+                }catch (Exception e){
+                    telaFuncionario.printExceptionMessage(e);
+                }
 
                 try {
                     ControladorFuncionario.getInstance().modificaFuncionario(matricula, nome, dataNascimento, telefone, salario, cargo);
@@ -159,17 +169,20 @@ public class ControladorFuncionario implements IControladorFuncionario {
                 }
                 break;
             case 4:
+                //Checagem da lista
                 if (listaFuncionario.isEmpty()) {
                     telaFuncionario.printFuncionarioListEmptyError();
                 }
+                //Impressao dos dados dos funcionario da lista na tela
                 telaFuncionario.printLista(listaFuncionario);
                 ControladorFuncionario.getInstance().inicia();
                 break;
             case 0:
-                telaFuncionario.printMainMenu();
+                //Volta para o menu principal
+                telaFuncionario.printReturnMainMenu();
                 ControladorPrincipal.getInstance().inicia();
             default:
-                telaFuncionario.printInputError();
+                telaFuncionario.printInvalidOptionError();
                 ControladorFuncionario.getInstance().inicia();
         }
     }
@@ -319,11 +332,45 @@ public class ControladorFuncionario implements IControladorFuncionario {
     public ArrayList<Funcionario> getListaFuncionario() {
         return listaFuncionario;
     }
-
+    /**
+     * Retorna a instancia do controlador Funcionário.
+     * @return Controlador Funcionario
+     */
     public static ControladorFuncionario getInstance() {
         if (controladorFuncionario == null) {
             controladorFuncionario = new ControladorFuncionario();
         }
         return controladorFuncionario;
+    }
+    /**
+     * Percorre lista de funcionários checando a presença
+     * de funcionários com o cargo informado.
+     * @param cargo
+     * @return boolean indicando a presença ou não de
+     * funcionários com o cargo informado.
+     */
+    public boolean hasFuncionarioByCargo(Cargo cargo) {
+        for(Funcionario funcionario: listaFuncionario){
+            if(funcionario.getCargo().equals(cargo)){
+                printFuncionarioByCargo(cargo);
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * Procura por funcionários associados ao cargo passado
+     * como parâmetro adiciona numa lista, a qual será impressa
+     * na tela posteriormente.
+     * @param cargo 
+     */
+    public void printFuncionarioByCargo(Cargo cargo) {
+        ArrayList<Funcionario> lista = new ArrayList<>();
+        for(Funcionario funcionario: listaFuncionario){
+            if(funcionario.getCargo().equals(cargo)){
+                lista.add(funcionario);
+            }
+        }
+        telaFuncionario.printLista(lista);
     }
 }

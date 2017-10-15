@@ -108,10 +108,18 @@ public class ControladorPrincipal {
 
     }
 
-    public Cargo chooseCargo() {
+    public Cargo chooseCargo() throws Exception {
         
         return ctrlCargo.chooseCargo();
 
+    }
+
+    public boolean hasFuncionarioByCargo(Cargo cargo) {
+        boolean hasFuncionario = ctrlFuncionario.hasFuncionarioByCargo(cargo);
+        if(hasFuncionario){
+            ctrlFuncionario.printFuncionarioByCargo(cargo);
+        }
+        return hasFuncionario;
     }
 
 }

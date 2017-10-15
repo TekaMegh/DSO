@@ -19,12 +19,13 @@ public class Cargo {
         this.nome = nome;
         this.mayEnter = mayEnter;
         this.intervalos = new ArrayList<>();
+        this.gerencial = false;
     }
 
     public int getCodigo() {
         return this.codigo;
     }
-
+    
     public String getNome() {
         return this.nome;
     }
@@ -41,9 +42,13 @@ public class Cargo {
         return intervalos;
     }
 
-    public void addIntervalos(IntervaloDeAcesso intervalo) {
-        
+    public void addIntervalo(String horaInicial, String horaFinal) {
+        IntervaloDeAcesso intervalo = new IntervaloDeAcesso(horaInicial, horaFinal);
         intervalos.add(intervalo);
+    }
+    
+    public void removeIntervalo(IntervaloDeAcesso intervalo) {
+        intervalos.remove(intervalo);
     }
 
     public boolean isGerencial() {
