@@ -122,4 +122,8 @@ public class ControladorPrincipal {
         return hasFuncionario;
     }
 
+    public boolean hasFuncionarioByMatricula(int matricula) {
+        return ctrlFuncionario.hasFuncionarioByMatricula(matricula);
+    }
+
 }

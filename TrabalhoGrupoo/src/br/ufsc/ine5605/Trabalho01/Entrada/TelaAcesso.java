@@ -44,11 +44,16 @@ public class TelaAcesso {
     }
 
     public void entrarSetor() {
-        int matricula;
+        int matricula=0;
         String horaDeAcesso;
         System.out.println("----------Tela Acesso: Entrar----------");
         System.out.println("Digite sua matrícula: ");
-        matricula = leia.nextInt();
+        try {
+            matricula = leia.nextInt();
+        }catch (IllegalArgumentException e){
+            System.out.println("A matricula é composta apenas por números. Por favor, tente novamente.");
+            this.entrarSetor();
+        }
         System.out.println("Digite o horario de acesso (HH:mm): ");
         horaDeAcesso = leia.next();
         

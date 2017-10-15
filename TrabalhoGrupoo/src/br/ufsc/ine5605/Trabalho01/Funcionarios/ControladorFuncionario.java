@@ -181,9 +181,11 @@ public class ControladorFuncionario implements IControladorFuncionario {
                 //Volta para o menu principal
                 telaFuncionario.printReturnMainMenu();
                 ControladorPrincipal.getInstance().inicia();
+                break;
             default:
                 telaFuncionario.printInvalidOptionError();
                 ControladorFuncionario.getInstance().inicia();
+                break;
         }
     }
 
