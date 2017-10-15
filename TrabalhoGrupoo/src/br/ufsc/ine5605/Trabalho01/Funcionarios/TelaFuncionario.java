@@ -46,6 +46,7 @@ public class TelaFuncionario {
     public void printData(Date data) {
         System.out.print("Data de nascimento: ");
         System.out.printf("%td %<tB %<tY", data);
+        System.out.println("\n");
     }
 
     /**
@@ -53,9 +54,17 @@ public class TelaFuncionario {
      * @return String nome.
      */
     public String printGetNome() {
-        System.out.println("Insira o seu nome:");
-        sc.next();
-        String nome = sc.nextLine();
+        String nome = null;
+        boolean emptyNome = false;
+        sc.nextLine();
+        do{
+            System.out.println("Insira o seu nome:");
+            nome = sc.nextLine();
+            emptyNome = nome.equals("");
+            if(emptyNome){
+                System.out.println("Nome inválido. O nome não pode estar em branco.");
+            }
+        } while (emptyNome);
         return nome;
     }
 
@@ -117,9 +126,25 @@ public class TelaFuncionario {
      * @return String representando o telefone.
      */
     public String printGetTelefone() {
-        System.out.println("Insira o telefone:");
-        sc.next();
-        String telefone = sc.nextLine();
+        System.out.println("Insira o telefone (formato (12)3456-7890 ou (12)12345-6789) sem espaços:");
+        String pattern1 = "^\\(\\d{2}\\)(\\d{4})[- ](\\d{4})";
+        String pattern2 = "^\\(\\d{2}\\)(\\d{5})[- ](\\d{4})";
+        String telefone = null;
+        boolean telefoneValido = false;
+        do{
+            telefone = sc.next();
+            if(!telefone.matches(pattern1) && !telefone.matches(pattern2)){
+                System.out.println("Formato do telefone inválido! Lembrando que é preciso digitar os parenteses\"()\" e hifen\"-\", e que não pode conter espaços. ");
+                System.out.println("Por favor, siga um dos exemplos abaixo:");
+                System.out.println("Para telefones fixos:");
+                System.out.println("(12)3456-7890");
+                System.out.println("No caso de celulares:");
+                System.out.println("(12)12345-6789");
+                System.out.println("Por favor, digite o telefone novamente:");
+            } else { 
+                telefoneValido = true;
+            }
+        } while (!telefoneValido);
         return telefone;
     }
     /**
@@ -159,11 +184,10 @@ public class TelaFuncionario {
             System.out.println("Nome: " + funcionario.getNome());
             System.out.println("Salário: " + funcionario.getSalario());
             System.out.println("Telefone: " + funcionario.getTelefone());
-            System.out.println("\n");
             printData(funcionario.getNascimento());
-            System.out.println("\n");
             System.out.println("Nome do cargo: " + funcionario.getCargo().getNome());
             System.out.println("Código do cargo: " + funcionario.getCargo().getCodigo());
+            System.out.println("-------------------------------------------------");
         }
     }
     /**
