@@ -32,7 +32,7 @@ public class ControladorCargo implements IControladorCargo {
     @Override
     public void inicia() {
         try {
-            tela.mostrarTela();
+            tela.mostrarTelaPrincipal();
         } catch (Exception ex) {
             Logger.getLogger(ControladorCargo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,7 +48,7 @@ public class ControladorCargo implements IControladorCargo {
      */
     @Override
     public Cargo incluiCargo(String nome, boolean mayEnter) {
-        boolean codigoExiste = false;
+        boolean codigoExiste;
         do {
             codigoExiste = this.hasCodigo(numCodigo);
             if (codigoExiste) {
