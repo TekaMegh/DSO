@@ -1,4 +1,4 @@
-/*
+﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -85,10 +85,12 @@ public class TelaFuncionario {
      * @return int representando o valor do salário
      */
     public int printGetSalario() {
-        System.out.println("Insira o salário:");
+        sc.nextLine();
+	System.out.println("Insira o salário:");
         while (!sc.hasNextInt()) {
             System.out.println("Salário Inválido.");
             System.out.println("Por favor, insira um número que corresponda ao salário do funcionário. ");
+	    sc.nextLine();
         }
         return sc.nextInt();
     }
