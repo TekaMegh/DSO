@@ -1,4 +1,4 @@
-/*
+/**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -12,6 +12,8 @@ package br.ufsc.ine5605.Trabalho01.Funcionarios;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+
+
 
 public class TelaFuncionario {
 
@@ -85,10 +87,12 @@ public class TelaFuncionario {
      * @return int representando o valor do salário
      */
     public int printGetSalario() {
+        sc.nextLine();
         System.out.println("Insira o salário:");
         while (!sc.hasNextInt()) {
             System.out.println("Salário Inválido.");
             System.out.println("Por favor, insira um número que corresponda ao salário do funcionário. ");
+            sc.nextLine();
         }
         return sc.nextInt();
     }
@@ -242,5 +246,13 @@ public class TelaFuncionario {
      */
     public void printModifySucess() {
         System.out.println("Funcionário modificado com sucesso!");
+    }
+
+    /**
+     * Imprime mensagem informando o valor null do atributo Cargo, deixando
+     * implicito a volta para o menu de funcionários.
+     */
+    public void printChooseCargoError() {
+        System.out.println("Nenhum cargo selecionado. Voltando ao menu de funcionários...");
     }
 }
