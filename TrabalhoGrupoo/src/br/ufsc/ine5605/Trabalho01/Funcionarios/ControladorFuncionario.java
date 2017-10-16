@@ -87,7 +87,11 @@ public class ControladorFuncionario implements IControladorFuncionario {
                 } catch(Exception e){
                     telaFuncionario.printExceptionMessage(e);
                 }
-
+                if (cargo == null){
+                    telaFuncionario.printChooseCargoError();
+                    this.inicia();
+                }
+                //Parte 6 - Chamada de método para instanciar/adicionar funcionário.       
                 try {
                     ControladorFuncionario.getInstance().incluiFuncionario(nome, dataNascimento, telefone, salario, cargo);
                 } catch (Exception e) {
@@ -139,7 +143,11 @@ public class ControladorFuncionario implements IControladorFuncionario {
                 }catch (Exception e){
                     telaFuncionario.printExceptionMessage(e);
                 }
-
+                if (cargo == null){
+                    telaFuncionario.printChooseCargoError();
+                    this.inicia();
+                }
+                //Parte 7 - Chamada de método para mudança dos dados do funcionário.
                 try {
                     ControladorFuncionario.getInstance().modificaFuncionario(matricula, nome, dataNascimento, telefone, salario, cargo);
                 } catch (Exception e) {

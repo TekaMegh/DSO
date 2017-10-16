@@ -243,4 +243,11 @@ public class TelaFuncionario {
     public void printModifySucess() {
         System.out.println("Funcionário modificado com sucesso!");
     }
+    /**
+     * Imprime mensagem informando o valor null do atributo Cargo, deixando implicito a
+     * volta para o menu de funcionários.
+     */
+    public void printChooseCargoError() {
+        System.out.println("Nenhum cargo selecionado. Voltando ao menu de funcionários...");
+    }
 }
