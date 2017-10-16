@@ -84,7 +84,7 @@ public class ControladorPrincipal {
                 break;
             default:
                 tela.printInvalidOptionError();
-                ControladorPrincipal.getInstance().inicia();
+                this.inicia();
         }
 
     }
