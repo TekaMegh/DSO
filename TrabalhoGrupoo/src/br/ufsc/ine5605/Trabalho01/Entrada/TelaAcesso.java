@@ -5,6 +5,7 @@ import java.text.DateFormat;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TelaAcesso {
@@ -28,7 +29,15 @@ public class TelaAcesso {
         int opcao = leia.nextInt();
         switch (opcao) {
             case 1:
-                this.entrarSetor();
+                while(true){
+                try{
+                    this.entrarSetor();
+                    break;
+                }catch(InputMismatchException e){
+                    System.out.println(e.getMessage());
+                    System.out.println("A matricula é composta apenas por números. Por favor, tente novamente.");
+                }
+                }
                 break;
             case 2:
                 this.registros();
@@ -48,12 +57,7 @@ public class TelaAcesso {
         String horaDeAcesso;
         System.out.println("----------Tela Acesso: Entrar----------");
         System.out.println("Digite sua matrícula: ");
-        try {
-            matricula = leia.nextInt();
-        }catch (IllegalArgumentException e){
-            System.out.println("A matricula é composta apenas por números. Por favor, tente novamente.");
-            this.entrarSetor();
-        }
+        matricula = leia.nextInt();
         System.out.println("Digite o horario de acesso (HH:mm): ");
         horaDeAcesso = leia.next();
         
