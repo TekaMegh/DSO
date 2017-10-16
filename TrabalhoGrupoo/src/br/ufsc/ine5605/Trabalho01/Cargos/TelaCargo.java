@@ -36,14 +36,21 @@ public class TelaCargo {
      *
      */
     public void mostrarTelaPrincipal() throws Exception {
-
+        int opcao = -1;
         System.out.println("------------Tela de Cargos--------------");
         System.out.println("1- Cadastrar cargo");
         System.out.println("2- Visualizar cargos existentes");
         System.out.println("3- Modificar cargo existente por código");
         System.out.println("4- Remover cargo existente por código");
         System.out.println("0- Voltar");
-        int opcao = leia.nextInt();
+
+        do {
+            try {
+                opcao = owner.parseInt(leia.next());
+            } catch (NumberFormatException e) {
+                this.printOpcaoInvalidaException(e);
+            }
+        } while (opcao == -1);
         /**
          * Tratamento das opções do menu principal da classe.
          */
@@ -115,6 +122,7 @@ public class TelaCargo {
     public void cadastroCargo() throws Exception {
         boolean opcaoInvalida;
         boolean mayEnter;
+        int opcao = -1;
         String nomeCargo;
         System.out.println("------------Tela de Cargos--------------");
         System.out.println("Nome do novo cargo: ");
@@ -125,7 +133,13 @@ public class TelaCargo {
             System.out.println("Esse cargo possui acesso ao financeiro?");
             System.out.println("1- Sim");
             System.out.println("2- Nao");
-            int opcao = leia.nextInt();
+            do {
+                try {
+                    opcao = owner.parseInt(leia.next());
+                } catch (NumberFormatException e) {
+                    this.printOpcaoInvalidaException(e);
+                }
+            } while (opcao == -1);
             /**
              * Trata o cadastro de cargos
              */
@@ -202,9 +216,10 @@ public class TelaCargo {
      * @throws Exception
      */
     public void modificaCargoByCodigo(int codigo) throws Exception {
-        boolean opcaoInvalida;
+        boolean b = true;
         do {
-            opcaoInvalida = false;
+            int opcao = -1;
+
             System.out.println("----------Modificação do cargo: " + owner.getCargoByCodigo(codigo).getNome() + "----------");
             System.out.println("1- Mudar nome");
             System.out.println("2- Mudar codigo");
@@ -212,7 +227,14 @@ public class TelaCargo {
             System.out.println("4- Incluir intervalo");
             System.out.println("5- Remover intervalo");
             System.out.println("0- Voltar");
-            int opcao = leia.nextInt();
+
+            do {
+                try {
+                    opcao = owner.parseInt(leia.next());
+                } catch (NumberFormatException e) {
+                    this.printOpcaoInvalidaException(e);
+                }
+            } while (opcao == -1);
             /**
              * Trata as opções do menu de modificações de cargos
              */
@@ -314,17 +336,17 @@ public class TelaCargo {
                  * Redireciona para o menu principal da classe
                  */
                 case 0:
-                    this.mostrarTelaPrincipal();
+
+                    b = false;
                     break;
                 /**
                  * Trata uma opção invalida recebida
                  */
                 default:
                     System.out.println("Opcao invalida");
-                    opcaoInvalida = true;
                     break;
             }
-        } while (opcaoInvalida);
+        } while (b);
     }
 
     /**
@@ -337,12 +359,20 @@ public class TelaCargo {
         boolean opcaoInvalida;
         do {
             opcaoInvalida = false;
+            int opcao = -1;
             System.out.println("----------Cadastro de Acesso----------");
             System.out.println("Em que intervalo(s) de tempo o cargo possui acesso ao Financeiro?");
             System.out.println("1- Esse é um cargo gerencial (Livre acesso ao Financeiro)");
             System.out.println("2- Horário comercial (Das 08:00 às 12:00 e 14:00 às 18:00)");
             System.out.println("3- Outro (cadastrar novo(s) intervalo(s))");
-            int opcao = leia.nextInt();
+
+            do {
+                try {
+                    opcao = owner.parseInt(leia.next());
+                } catch (NumberFormatException e) {
+                    this.printOpcaoInvalidaException(e);
+                }
+            } while (opcao == -1);
             /**
              * Trata as opções do menu de cadastro de acesso ao Financeiro
              */
@@ -392,6 +422,7 @@ public class TelaCargo {
      */
     public void cadastroOutroIntervalo(Cargo cargo) throws Exception {
         boolean opcaoInvalida;
+        int opcao = -1;
         String horaInicial;
         String horaFinal;
         System.out.println("Qual a hora inicial do intervalo? (HH:mm)");
@@ -403,7 +434,13 @@ public class TelaCargo {
             System.out.println("A hora inicial é " + horaInicial + " e a hora final é " + horaFinal + "?");
             System.out.println("1- Sim");
             System.out.println("2- Nao");
-            int opcao = leia.nextInt();
+            do {
+                try {
+                    opcao = owner.parseInt(leia.next());
+                } catch (NumberFormatException e) {
+                    this.printOpcaoInvalidaException(e);
+                }
+            } while (opcao == -1);
             /**
              * Trata as opções do cadastro
              */
@@ -412,6 +449,7 @@ public class TelaCargo {
                  * Cadastra um intervalo de acesso
                  */
                 case 1:
+                    int opcao2 = -1;
                     do {
                         opcaoInvalida = false;
                         owner.setIntervaloInCargoByCodigo(cargo.getCodigo(), horaInicial, horaFinal);
@@ -419,11 +457,17 @@ public class TelaCargo {
                         System.out.println("Deseja cadastrar outro intervalo?");
                         System.out.println("1- Sim");
                         System.out.println("2- Nao");
-                        opcao = leia.nextInt();
+                        do {
+                            try {
+                                opcao2 = owner.parseInt(leia.next());
+                            } catch (NumberFormatException e) {
+                                this.printOpcaoInvalidaException(e);
+                            }
+                        } while (opcao2 == -1);
                         /**
                          * Trata o cadastro de intervalo de acesso
                          */
-                        switch (opcao) {
+                        switch (opcao2) {
                             /**
                              * Redireciona para o cadastro de um novo intervalo
                              */
@@ -471,6 +515,7 @@ public class TelaCargo {
      */
     public Cargo chooseCargo() throws Exception {
         boolean opcaoInvalida;
+        int opcao = -1;
         System.out.println("----------Listagem de Cargos----------");
         ArrayList<Cargo> listaCargos = owner.getCargos();
         if (listaCargos.isEmpty()) {
@@ -479,7 +524,13 @@ public class TelaCargo {
                 opcaoInvalida = false;
                 System.out.println("1- Cadastrar um novo cargo");
                 System.out.println("2- Retornar para o menu de funcionários");
-                int opcao = leia.nextInt();
+                do {
+                    try {
+                        opcao = owner.parseInt(leia.next());
+                    } catch (NumberFormatException e) {
+                        this.printOpcaoInvalidaException(e);
+                    }
+                } while (opcao == -1);
                 /**
                  * Trata das opções quando não há cargos para escolha
                  */
@@ -511,8 +562,9 @@ public class TelaCargo {
                 Cargo cargo = listaCargos.get(i - 1);
                 System.out.println(i + " - " + cargo.getNome() + " - Código: " + cargo.getCodigo());
             }
-            int opcao = leia.nextInt();
-            return listaCargos.get(opcao - 1);
+            int opcao2;
+            opcao2 = leia.nextInt();
+            return listaCargos.get(opcao2 - 1);
         }
     }
 
@@ -544,6 +596,7 @@ public class TelaCargo {
     public void modificaIntervalo(IntervaloDeAcesso intervalo, int codigo) throws Exception {
         owner.removeIntervalosByCodigo(codigo, intervalo);
         boolean opcaoInvalida;
+        int opcao = -1;
         String horaInicial;
         String horaFinal;
         System.out.println("Qual a hora inicial do intervalo? (HH:mm)");
@@ -555,7 +608,13 @@ public class TelaCargo {
             System.out.println("A hora inicial é " + horaInicial + " e a hora final é " + horaFinal + "?");
             System.out.println("1- Sim");
             System.out.println("2- Nao");
-            int opcao = leia.nextInt();
+            do {
+                try {
+                    opcao = owner.parseInt(leia.next());
+                } catch (NumberFormatException e) {
+                    this.printOpcaoInvalidaException(e);
+                }
+            } while (opcao == -1);
             /**
              * Trata a confirmação da alteração de intervalo
              */
@@ -583,4 +642,17 @@ public class TelaCargo {
             }
         } while (opcaoInvalida);
     }
+
+    /**
+     * imprime mensagem "A opcao não é um número válido"
+     *
+     * @param e (NumberFormatException)
+     */
+    public void printOpcaoInvalidaException(NumberFormatException e) {
+
+        System.out.println(e.getMessage());
+        System.out.println("A opcao não é um número válido.");
+
+    }
+
 }

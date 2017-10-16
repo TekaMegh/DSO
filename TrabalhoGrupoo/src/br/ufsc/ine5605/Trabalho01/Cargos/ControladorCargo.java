@@ -36,7 +36,7 @@ public class ControladorCargo implements IControladorCargo {
         } catch (Exception ex) {
             Logger.getLogger(ControladorCargo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+     }
 
     /**
      *
@@ -246,4 +246,18 @@ public class ControladorCargo implements IControladorCargo {
         ArrayList<Cargo> listaCargos = this.getCargos();
         return !listaCargos.isEmpty();
     }
+    /**
+     * Realiza um comando "parse" na String recebida, a transformando em "int".
+     *
+     * @param entrada
+     * @return
+     * @throws NumberFormatException
+     */
+    public int parseInt(String entrada) throws NumberFormatException {
+
+        return Integer.parseInt(entrada);
+
+    }
+    
+    
 }
