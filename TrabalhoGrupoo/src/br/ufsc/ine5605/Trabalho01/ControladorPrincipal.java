@@ -8,9 +8,12 @@ package br.ufsc.ine5605.Trabalho01;
 
 import br.ufsc.ine5605.Trabalho01.Cargos.Cargo;
 import br.ufsc.ine5605.Trabalho01.Cargos.ControladorCargo;
+import br.ufsc.ine5605.Trabalho01.Cargos.IControladorCargo;
 import br.ufsc.ine5605.Trabalho01.Entrada.ControladorAcesso;
+import br.ufsc.ine5605.Trabalho01.Entrada.IControladorAcesso;
 import br.ufsc.ine5605.Trabalho01.Funcionarios.ControladorFuncionario;
 import br.ufsc.ine5605.Trabalho01.Funcionarios.Funcionario;
+import br.ufsc.ine5605.Trabalho01.Funcionarios.IControladorFuncionario;
 import java.util.ArrayList;
 
 /**
@@ -20,9 +23,9 @@ import java.util.ArrayList;
 public class ControladorPrincipal {
 
     private static ControladorPrincipal controladorPrincipal;
-    private ControladorCargo ctrlCargo;
-    private ControladorFuncionario ctrlFuncionario;
-    private ControladorAcesso ctrlAcesso;
+    private IControladorCargo ctrlCargo;
+    private IControladorFuncionario ctrlFuncionario;
+    private IControladorAcesso ctrlAcesso;
 
     private TelaPrincipal tela;
 
@@ -49,11 +52,13 @@ public class ControladorPrincipal {
      * Mostra a tela principal, e encaminha a opção escolhida para tratamento.
      */
     public void inicia() {
-        int opcao = tela.exibeMenuPrincipal();
-        try {
-            opcaoSwitch(opcao);
-        } catch (Exception e) {
-            tela.print(e.getMessage());
+        while (true) {
+            int opcao = tela.exibeMenuPrincipal();
+            try {
+                opcaoSwitch(opcao);
+            } catch (Exception e) {
+                tela.print(e.getMessage());
+            }
         }
     }
 
@@ -73,6 +78,7 @@ public class ControladorPrincipal {
                 break;
             case 3:
                 ctrlFuncionario.inicia();
+                break;
             case 0:
                 System.exit(0);
                 break;
@@ -80,6 +86,7 @@ public class ControladorPrincipal {
                 tela.printInvalidOptionError();
                 ControladorPrincipal.getInstance().inicia();
         }
+
     }
 
     public ArrayList<Funcionario> getListaFuncionarios() {
@@ -109,14 +116,14 @@ public class ControladorPrincipal {
     }
 
     public Cargo chooseCargo() throws Exception {
-        
+
         return ctrlCargo.chooseCargo();
 
     }
 
     public boolean hasFuncionarioByCargo(Cargo cargo) {
         boolean hasFuncionario = ctrlFuncionario.hasFuncionarioByCargo(cargo);
-        if(hasFuncionario){
+        if (hasFuncionario) {
             ctrlFuncionario.printFuncionarioByCargo(cargo);
         }
         return hasFuncionario;

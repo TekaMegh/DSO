@@ -11,4 +11,6 @@ public interface IControladorCargo {
     public void removeCargoByCodigo(int codigo) throws Exception;
 
     public ArrayList<Cargo> getCargos();
+
+    public Cargo chooseCargo() throws Exception;
 }

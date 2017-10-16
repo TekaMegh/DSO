@@ -7,7 +7,7 @@ public interface IControladorAcesso {
 
     public void inicia();
 
-    public TipoAcesso validaAcesso(int matricula, String horaDeAcesso);
+    public String validaAcesso(int matricula, Date horaDeAcesso);
 
     public ArrayList<Acesso> getAcessosByTipo(TipoAcesso tipo);
 

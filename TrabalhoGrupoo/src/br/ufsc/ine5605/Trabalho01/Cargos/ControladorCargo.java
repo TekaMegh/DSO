@@ -82,7 +82,7 @@ public class ControladorCargo implements IControladorCargo {
     public Cargo getCargoByCodigo(int codigo) throws Exception {
         for (Cargo cargo : cargos) {
             if (cargo.getCodigo() == codigo) {
-                    
+
                 return cargo;
             }
         }
@@ -93,12 +93,12 @@ public class ControladorCargo implements IControladorCargo {
         Cargo cargo = this.getCargoByCodigo(codigo);
         cargo.addIntervalo(deHora, ateHora);
     }
-    
+
     public void removeIntervalosByCodigo(int codigo, IntervaloDeAcesso intervalo) throws Exception {
         Cargo cargo = this.getCargoByCodigo(codigo);
         cargo.removeIntervalo(intervalo);
     }
-    
+
     public ArrayList<IntervaloDeAcesso> getIntervalosByCodigo(int codigo) throws Exception {
         Cargo cargo = this.getCargoByCodigo(codigo);
         return cargo.getIntervalos();
@@ -132,11 +132,16 @@ public class ControladorCargo implements IControladorCargo {
         cargo.setCodigo(novoCodigo);
     }
 
+    /**
+     *
+     * @return @throws Exception
+     */
+    @Override
     public Cargo chooseCargo() throws Exception {
         return this.tela.chooseCargo();
     }
 
-    public static ControladorCargo getInstance() {
+    public static IControladorCargo getInstance() {
         if (controladorCargo == null) {
             controladorCargo = new ControladorCargo();
         }

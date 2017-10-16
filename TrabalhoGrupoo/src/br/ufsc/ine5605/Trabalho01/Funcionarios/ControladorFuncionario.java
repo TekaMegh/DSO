@@ -82,9 +82,9 @@ public class ControladorFuncionario implements IControladorFuncionario {
 
                 //Parte 5 - Cargo;
                 Cargo cargo = null;
-                try{
+                try {
                     cargo = ControladorPrincipal.getInstance().chooseCargo();
-                } catch(Exception e){
+                } catch (Exception e) {
                     telaFuncionario.printExceptionMessage(e);
                 }
 
@@ -134,9 +134,9 @@ public class ControladorFuncionario implements IControladorFuncionario {
 
                 //Parte 6 - Cargo
                 cargo = null;
-                try{
+                try {
                     cargo = ControladorPrincipal.getInstance().chooseCargo();
-                }catch (Exception e){
+                } catch (Exception e) {
                     telaFuncionario.printExceptionMessage(e);
                 }
 
@@ -323,6 +323,7 @@ public class ControladorFuncionario implements IControladorFuncionario {
      * @param matricula
      * @return boolean
      */
+    @Override
     public boolean hasFuncionarioByMatricula(int matricula) {
         for (Funcionario funcionario : listaFuncionario) {
             if (funcionario.getMatricula() == matricula) {
@@ -332,44 +333,52 @@ public class ControladorFuncionario implements IControladorFuncionario {
         return false;
     }
 
+    @Override
     public ArrayList<Funcionario> getListaFuncionario() {
         return listaFuncionario;
     }
+
     /**
      * Retorna a instancia do controlador Funcionário.
+     *
      * @return Controlador Funcionario
      */
-    public static ControladorFuncionario getInstance() {
+    public static IControladorFuncionario getInstance() {
         if (controladorFuncionario == null) {
             controladorFuncionario = new ControladorFuncionario();
         }
         return controladorFuncionario;
     }
+
     /**
-     * Percorre lista de funcionários checando a presença
-     * de funcionários com o cargo informado.
+     * Percorre lista de funcionários checando a presença de funcionários com o
+     * cargo informado.
+     *
      * @param cargo
-     * @return boolean indicando a presença ou não de
-     * funcionários com o cargo informado.
+     * @return boolean indicando a presença ou não de funcionários com o cargo
+     * informado.
      */
+    @Override
     public boolean hasFuncionarioByCargo(Cargo cargo) {
-        for(Funcionario funcionario: listaFuncionario){
-            if(funcionario.getCargo().equals(cargo)){
+        for (Funcionario funcionario : listaFuncionario) {
+            if (funcionario.getCargo().equals(cargo)) {
                 return true;
             }
         }
         return false;
     }
+
     /**
-     * Procura por funcionários associados ao cargo passado
-     * como parâmetro adiciona numa lista, a qual será impressa
-     * na tela posteriormente.
-     * @param cargo 
+     * Procura por funcionários associados ao cargo passado como parâmetro
+     * adiciona numa lista, a qual será impressa na tela posteriormente.
+     *
+     * @param cargo
      */
+    @Override
     public void printFuncionarioByCargo(Cargo cargo) {
         ArrayList<Funcionario> lista = new ArrayList<>();
-        for(Funcionario funcionario: listaFuncionario){
-            if(funcionario.getCargo().equals(cargo)){
+        for (Funcionario funcionario : listaFuncionario) {
+            if (funcionario.getCargo().equals(cargo)) {
                 lista.add(funcionario);
             }
         }
